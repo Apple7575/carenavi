@@ -95,12 +95,32 @@ Total screens: 13 (each with `code.html` + `screen.png`)
 
 ### For Each Screen/Feature
 
-1. **Specification Phase**
-   ```bash
-   /speckit.specify "Implement [feature name] based on reference/care99_[feature]/"
+1. **Use the Prompt Template** ⚠️ **CRITICAL**
+
+   Always use the standardized prompt template to ensure SpecKit compliance:
+
+   **Template Location**: `.specify/templates/reference-prompt-template.md`
+
+   **Prompt Structure (Priority Order)**:
+   ```
+   1. 구조 (Structure) - 최우선: SpecKit rules, Shadcn/UI, naming conventions
+   2. 스타일링 (Styling) - 두 번째: CareNavi design tokens, no hardcoding
+   3. 비주얼 (Visual) - 세 번째: Stitch layout reference
    ```
 
-2. **Reference the Design**
+2. **Specification Phase**
+   ```bash
+   /speckit.specify "지금부터 reference/care99_[feature]/ 에 있는 디자인을 구현할 거야.
+
+   우선순위:
+   1. 구조: SpecKit 컴포넌트 분리 규칙, Shadcn/UI 사용, 헌법 원칙 준수
+   2. 스타일링: CareNavi 디자인 토큰 사용, 하드코딩 금지
+   3. 비주얼: Stitch 레이아웃 패턴 참조
+
+   [feature에 대한 사용자 스토리 설명]"
+   ```
+
+3. **Reference the Design**
    - Open `reference/care99_[feature]/screen.png` in IDE
    - Review `reference/care99_[feature]/code.html` for:
      - Layout structure
@@ -108,7 +128,7 @@ Total screens: 13 (each with `code.html` + `screen.png`)
      - Interactive elements
      - Data requirements
 
-3. **Planning Phase**
+4. **Planning Phase**
    ```bash
    /speckit.plan
    ```
@@ -117,7 +137,7 @@ Total screens: 13 (each with `code.html` + `screen.png`)
    - Identify data entities
    - Define API contracts (if needed)
 
-4. **Implementation Phase**
+5. **Task Generation & Implementation Phase**
    ```bash
    /speckit.tasks
    /speckit.implement
