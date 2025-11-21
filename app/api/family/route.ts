@@ -68,12 +68,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    console.log('POST /api/family - User:', { id: user.id, email: user.email });
+
     const body = await request.json();
 
     // Generate unique invite code
     const inviteCode = generateInviteCode();
 
-    // Create family
+    console.log('Attempting to insert family:', { name: body.name, created_by: user.id, invite_code: inviteCode });
+
+    // Create family - DISABLE RLS check temporarily to test
     const { data: family, error: familyError } = await supabase
       .from('families')
       .insert({
@@ -83,6 +87,8 @@ export async function POST(request: NextRequest) {
       })
       .select()
       .single();
+
+    console.log('Family creation result:', { family, error: familyError });
 
     if (familyError) throw familyError;
 
