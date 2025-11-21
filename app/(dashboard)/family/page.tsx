@@ -39,8 +39,8 @@ export default function FamilyPage() {
   }
 
   const hasFamily = members && members.length > 0;
-  const inviteCode = hasFamily ? members[0].family.invite_code : null;
-  const familyName = hasFamily ? members[0].family.name : null;
+  const inviteCode = hasFamily && members[0].family ? members[0].family.invite_code : null;
+  const familyName = hasFamily && members[0].family ? members[0].family.name : null;
 
   return (
     <div className="space-y-6">
