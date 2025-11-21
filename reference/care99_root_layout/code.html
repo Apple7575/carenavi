@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Care99 Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#13ecc8",
+            "background-light": "#f6f8f8",
+            "background-dark": "#10221f",
+            "sky-500": "#3B82F6",
+            "sky-100": "#DBEAFE",
+            "gray-50": "#F9FAFB",
+            "gray-800": "#1F2937",
+            "gray-500": "#6B7280",
+            "gray-200": "#E5E7EB",
+            "dark-bg": "#111827",
+            "dark-surface": "#1F2937",
+            "dark-text": "#F9FAFB",
+            "dark-text-secondary": "#9CA3AF"
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+</head>
+<body class="font-display bg-gray-50 dark:bg-dark-bg">
+<div class="relative min-h-screen lg:flex">
+<header class="sticky top-0 z-20 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-dark-surface lg:hidden">
+<div class="flex items-center gap-3">
+<button class="text-gray-800 dark:text-dark-text">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-2 text-gray-800 dark:text-dark-text">
+<span class="material-symbols-outlined text-sky-500">health_and_safety</span>
+<h2 class="text-lg font-bold leading-tight">Care99</h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-gray-800 dark:text-dark-text">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBhuhoedF2_nCUHOp_iUy6iVksv249yf1wIAYTTp6_iFNil4GTmMgEXD786nTrCmHu46V-VPLGxbrTzawj_5082aBTJIhUSt7TLA7mVrYZDFg6g79vndRx0CGZahzN-4Zkxs1SPulTGbeCXs2BDmKMiKq9kxEdu8R6e64wJ4Y4f8gPJ2C8H8FQo0Y9qWNQXTVzq-YmNE-oy7fkkp_x_Lwn_IFSEhfBKCxeVooYOe7QnirN6R1oHKUL37-3xF4PG80HCcaqXBkBbwcWo");'></div>
+</div>
+</header>
+<aside class="fixed inset-y-0 left-0 z-30 flex w-64 transform flex-col border-r border-gray-200 bg-white p-4 transition-transform duration-300 ease-in-out dark:border-gray-800 dark:bg-dark-surface lg:translate-x-0 -translate-x-full lg:static">
+<div class="flex items-center gap-3 px-2 pt-2 pb-6">
+<span class="material-symbols-outlined text-3xl text-sky-500">health_and_safety</span>
+<h1 class="text-gray-800 dark:text-dark-text text-xl font-bold">Care99</h1>
+</div>
+<nav class="flex flex-1 flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg bg-sky-100 px-3 py-2 text-sky-500 dark:bg-sky-500/20" href="#">
+<span class="material-symbols-outlined fill">dashboard</span>
+<p class="text-sm font-semibold">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 hover:bg-gray-100 dark:text-dark-text-secondary dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">groups</span>
+<p class="text-sm font-medium">Family Members</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 hover:bg-gray-100 dark:text-dark-text-secondary dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">cardiology</span>
+<p class="text-sm font-medium">Health Records</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 hover:bg-gray-100 dark:text-dark-text-secondary dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">pill</span>
+<p class="text-sm font-medium">Medication Schedule</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 hover:bg-gray-100 dark:text-dark-text-secondary dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<p class="text-sm font-medium">AI Health Insights</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 hover:bg-gray-100 dark:text-dark-text-secondary dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<p class="text-sm font-medium">Appointments</p>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-2">
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 hover:bg-gray-100 dark:text-dark-text-secondary dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+<div class="border-t border-gray-200 pt-4 mt-2 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5OQZbgBvyGxD6PHUUKFC-_BAKdurjOLIRrha1X6E4A2_A0G8G0URiZ36BCKaqggfhAAiOrj02lL00ZYLlfktMASUg4k8ZnJ_q3JalPSgItahI9t25d3wxumV1bKN1ZQz4RLftiKy3wQzgdeXhvbMhVALcoBqsznvy0CaBpLzlmpy0LblK_exJd-u9WIUc2vscKmb34vxSiMxI3ETlt4MzCzy-bw-e-4t_AuOAyGO-mIYPt4bkYp5uXPZzlZfP8v-RsqA7LMbD5o43");'></div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-gray-800 dark:text-dark-text">Alex Turner</p>
+<p class="text-xs text-gray-500 dark:text-dark-text-secondary">alex.turner@example.com</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="w-full flex-1 p-4 sm:p-6 lg:p-8">
+<div class="mx-auto max-w-7xl">
+<div class="mb-8">
+<h1 class="text-3xl font-bold tracking-tight text-gray-800 dark:text-dark-text">Welcome, Alex!</h1>
+<p class="mt-1 text-base text-gray-500 dark:text-dark-text-secondary">Here is your family's health overview.</p>
+</div>
+<div class="flex min-h-[60vh] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-white p-12 dark:border-gray-700 dark:bg-dark-surface">
+<div class="text-center">
+<span class="material-symbols-outlined text-6xl text-gray-400 dark:text-gray-600">widgets</span>
+<p class="mt-4 text-lg font-medium text-gray-500 dark:text-dark-text-secondary">Loading your dashboard...</p>
+<p class="mt-1 text-sm text-gray-400 dark:text-gray-500">Your health widgets will appear here.</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Care99 - Family Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+    .material-symbols-outlined.fill {
+        font-variation-settings: 'FILL' 1;
+    }
+  </style>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2563EB",
+            "primary-light": "#DBEAFE",
+            "background-light": "#F8FAFC",
+            "background-dark": "#1e293b",
+            "text-light": "#334155",
+            "text-dark": "#E2E8F0",
+            "border-light": "#E2E8F0",
+            "border-dark": "#334155"
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full">
+<aside class="flex flex-col w-64 bg-white dark:bg-[#111827] border-r border-border-light dark:border-border-dark p-4 shrink-0">
+<div class="flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl">health_and_safety</span>
+<span class="text-2xl font-bold text-text-light dark:text-text-dark">care99</span>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar for Alex Johnson" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB6W6EWNtn9KlS08vuo5YrLNYQCF7LasOv7t-4Frxg9WXrwjGTxPgbGOnvP67eKm11QADrIag6GaxgcDIsLLLSJCASLpxJbXw4LIYXB-Vl6w43Mu8iVaU0JpJi0W9ADjibU3qFN-AgCZb7vPlrvWUAUmv01LbMKTz8t5g1wvKXBZDPj_mNH-8Uscw8uS92vmPpl5kMEef8oSDxWEet-rnnt7TBKtn7lqthoETBQ6AF0TE3oE5kb_Bdbq67NovwA6NFyabjo5ToGB2y2");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Alex Johnson</h1>
+<p class="text-gray-500 dark:text-gray-400 text-xs font-normal leading-normal">alex.j@email.com</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT hover:bg-primary-light dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-text-light dark:text-text-dark text-xl">dashboard</span>
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT hover:bg-primary-light dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-text-light dark:text-text-dark text-xl">medication</span>
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Medication</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT hover:bg-primary-light dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-text-light dark:text-text-dark text-xl">calendar_month</span>
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Appointments</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT bg-primary-light dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-primary dark:text-primary-light text-xl fill">groups</span>
+<p class="text-primary dark:text-primary-light text-sm font-bold leading-normal">Family Management</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT hover:bg-primary-light dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-text-light dark:text-text-dark text-xl">settings</span>
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+<div class="mt-auto flex flex-col gap-2">
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90">
+<span class="truncate">New Report</span>
+</button>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT hover:bg-primary-light dark:hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-text-light dark:text-text-dark text-xl">help</span>
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Support</p>
+</a>
+</div>
+</aside>
+<main class="flex-1 p-8 overflow-y-auto">
+<div class="max-w-7xl mx-auto space-y-8">
+<header>
+<p class="text-text-light dark:text-text-dark text-3xl font-black leading-tight tracking-tight">Family Management</p>
+</header>
+<section class="bg-white dark:bg-[#111827] border border-border-light dark:border-border-dark p-6 rounded-lg shadow-sm">
+<div class="flex flex-col md:flex-row items-start gap-6">
+<div class="flex-grow space-y-4">
+<h2 class="text-text-light dark:text-text-dark text-lg font-bold leading-tight">Invite a New Family Member</h2>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">
+                Share this secure link or QR code to invite a new member to your family group. The link will be valid for 24 hours.
+              </p>
+<div class="flex flex-col sm:flex-row items-end gap-4">
+<label class="flex flex-col w-full">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Invitation Link</p>
+<input class="form-input flex w-full min-w-0 resize-none overflow-hidden rounded-DEFAULT text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-10 placeholder:text-gray-400 p-2 text-sm font-normal" readonly="" value="https://care99.app/invite/aB3xYz7pQ"/>
+</label>
+<div class="flex gap-2 w-full sm:w-auto shrink-0">
+<button class="flex w-full sm:w-auto cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal hover:bg-primary/90">
+<span class="material-symbols-outlined text-base">link</span>
+<span class="truncate">Copy</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 p-3 bg-background-light dark:bg-background-dark rounded-lg border border-border-light dark:border-border-dark">
+<div class="w-32 h-32 bg-center bg-no-repeat bg-contain" data-alt="QR code for family invitation" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdiJtc3x4VkkfcZ8nMdk_XhDVnj4AzIbxKmOj9zFfjPQfRCfvk7YtrJzj5gI8wYxpQVG__6JW9s5SjrQlmu0N9dc6H0yuO29SURRnU3nOkDcU0uoTOT799hYmygE544QVXKtV7Vlw_kHW2z0oeZRB1rd6c2rLFDePIMnGmMkgzs5Tmun4pQMDKM5kudyQazaTQSF3J6_JGMgNQ5bK3M5qhJBI-hCweC4y_nWuHUYMsCS3C63FSUuMRDBwsS-Th4LeCs2Kg50FCT48v");'></div>
+<button class="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-8 px-3 bg-gray-200 dark:bg-gray-700 text-text-light dark:text-text-dark text-xs font-bold leading-normal">
+<span class="material-symbols-outlined text-sm">download</span>
+<span class="truncate">Download</span>
+</button>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-[#111827] border border-border-light dark:border-border-dark p-6 rounded-lg shadow-sm">
+<h2 class="text-text-light dark:text-text-dark text-lg font-bold leading-tight mb-4">Family Members</h2>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-background-light dark:hover:bg-background-dark transition-colors duration-150">
+<div class="flex items-center gap-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Avatar of Jane Doe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd-Hz1_lHAqkifWpb3-Nq5C5fmVx9jWH6vCww8wL0imPeFrbgXQOdvHrRjZCR474WfeKd1ELemHGB1RnmYZaZC-CeYwFFdlBgSO0MDKt-bE76mb5X9b7bmTaXupn-E_OdDwbj2GYVpUBTE3NrLeSqjakpma_NjGGWl6ws27HRkMoIRX-8R4cgicYHtoygbnwj_2-GLE70M4kByFoQWv_aMK0Ed8yOxx-32Q3Z6SPYd3k9zy6Bc79ANOmQC52Iy9FH0uQ-LgGnEStvV"/>
+<div>
+<p class="font-semibold text-text-light dark:text-text-dark">Jane Doe</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">jane.doe@email.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<select class="form-select rounded-DEFAULT border-border-light dark:border-border-dark bg-white dark:bg-[#111827] text-sm focus:ring-primary focus:border-primary">
+<option>Editor</option>
+<option>Viewer</option>
+</select>
+<button class="text-gray-400 hover:text-red-500 dark:hover:text-red-400">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-background-light dark:hover:bg-background-dark transition-colors duration-150">
+<div class="flex items-center gap-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Avatar of John Smith" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtb23IIR5atXesNHU2qv_J3oQrwqrLDIj6kn3l2dFaIX1Fq8ZxZ1IfjAb8Vfzr_kIcTuemx49308ixrOgfZjwbuAayljbClo3cQz9gu5PZ-Hea5bh8juSb3mjXqb0roqy4gAVR9-nP2PhW_2KgR12y8Cq-2kBuIpeyF0MFInmkXb7ITRVaxvKkdgRA5MmU9PhBstQ_Q-dFa12bNOL105Ese8QO1dwcqwNsPMEJTO-Zs0NMhVQsnmJPX2qD4GGyCOVGtUbAotzVnzCR"/>
+<div>
+<p class="font-semibold text-text-light dark:text-text-dark">John Smith</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">john.smith@email.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<select class="form-select rounded-DEFAULT border-border-light dark:border-border-dark bg-white dark:bg-[#111827] text-sm focus:ring-primary focus:border-primary">
+<option>Viewer</option>
+<option>Editor</option>
+</select>
+<button class="text-gray-400 hover:text-red-500 dark:hover:text-red-400">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-text-light dark:text-text-dark text-lg font-bold leading-tight mb-4">Family Health Overview</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-[#111827] border border-border-light dark:border-border-dark p-4 rounded-lg shadow-sm space-y-3">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Avatar of Alex Johnson" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJfbLJGtUqLtQiuinziEX8KK8f72jDCknX6gRsAQlMon2EEeq_5-4RRy1WQDFZ_6OnPxOBOJ9pXFqpB9rxzUUVlYouHYHKQwhT3qTaB4T2rTm997qpe5IoJEJxwJKWKq8Q7zq_3v-_msE_Bo_jplycpkvJ36lXELW3KOChkneGefCfWNGd-97so9bqIN22EVT1tpLdx1CsNLfrBHBRqkbzIeriTY2slsM0nlior6sh6nEuwdZb1ewSWyiD8TJydV3QGHLO-SeqGd6R"/>
+<div>
+<p class="font-semibold text-text-light dark:text-text-dark">Alex Johnson (You)</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Last update: Today</p>
+</div>
+</div>
+<div class="border-t border-border-light dark:border-border-dark pt-3 space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Blood Pressure</span>
+<span class="font-bold text-text-light dark:text-text-dark">120/80 mmHg</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Medication</span>
+<span class="font-bold text-green-600 dark:text-green-400">On Schedule</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Next Appt.</span>
+<span class="font-bold text-text-light dark:text-text-dark">Oct 25, 2023</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#111827] border border-border-light dark:border-border-dark p-4 rounded-lg shadow-sm space-y-3">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Avatar of Jane Doe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1np3UujSaUy9q5l48enDZJpP8H4AJ2E54qLed5Jkiecsd-DVq3u2S7m_e8JgRkXQ78LD1ywaQuqeyY6o3a19CXi2-TQ2dsdV3sGqIDyd2q2_uhKTbLr_wBE09fHJAPjfpr_Z86Btp1_IPyOCLnN1kfh39q9HOI9TG27CME86wy9wHtmdKIOjQLEMVgdEBIvypp97j0cmdonYQOWOuZDYflgRcY-coTNO07FTr3FxTMoCLiy5JD9PqrvGHNDQDAUwyU2ip7Ai_gZoT"/>
+<div>
+<p class="font-semibold text-text-light dark:text-text-dark">Jane Doe</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Last update: Yesterday</p>
+</div>
+</div>
+<div class="border-t border-border-light dark:border-border-dark pt-3 space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Blood Pressure</span>
+<span class="font-bold text-text-light dark:text-text-dark">125/82 mmHg</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Medication</span>
+<span class="font-bold text-green-600 dark:text-green-400">On Schedule</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Next Appt.</span>
+<span class="font-bold text-text-light dark:text-text-dark">Nov 12, 2023</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#111827] border border-border-light dark:border-border-dark p-4 rounded-lg shadow-sm space-y-3">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Avatar of John Smith" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMVrii4JF8AZg5hHvfCgcydhNz1i7nRUVniISi-I_gwP_CV4-6Hmda8fYaLYHbZLsr4xUhJqRyIWZtCXsguB-PlvDwsRbYvYbuxtMvgkgFhRQ7a69UuLHutlBmEPgXHqC5V8IszoEQSNaMIgOL8Abn1fD8HNXDZInQsMMlpETCfmo_3A1E5R0eZ5GqilRC3weV-6fIKKdXODZwuXJWAG3cRIsxrLpX4AtSNxX4i_RPz8oKCdRWqy0PjyxaKmoxdCYTVkCGP30RaK7j"/>
+<div>
+<p class="font-semibold text-text-light dark:text-text-dark">John Smith</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Last update: 3 days ago</p>
+</div>
+</div>
+<div class="border-t border-border-light dark:border-border-dark pt-3 space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Blood Pressure</span>
+<span class="font-bold text-orange-600 dark:text-orange-400">135/88 mmHg</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Medication</span>
+<span class="font-bold text-red-600 dark:text-red-400">1 Dose Missed</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Next Appt.</span>
+<span class="font-bold text-text-light dark:text-text-dark">None Scheduled</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

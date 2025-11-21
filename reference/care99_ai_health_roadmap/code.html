@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Health Roadmap &amp; Reports - Care99</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body, .printable-content {
+                margin: 0;
+                padding: 0;
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 12pt;
+            }
+            .printable-content .text-4xl {
+                font-size: 24pt;
+                color: #000000 !important;
+            }
+            .printable-content .text-lg {
+                font-size: 14pt;
+                 color: #000000 !important;
+            }
+             .printable-content p, .printable-content li {
+                 color: #212529 !important;
+             }
+            .print-card {
+                border: 1px solid #dee2e6 !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2563eb",
+              "background-light": "#f6f8f8",
+              "background-dark": "#101827",
+              "text-light": "#0d1b19",
+              "text-dark": "#e0e4e3",
+              "card-light": "#ffffff",
+              "card-dark": "#152335",
+              "subtle-light": "#eef2ff",
+              "subtle-dark": "#1e293b",
+              "accent-light": "#475569",
+              "accent-dark": "#94a3b8",
+              "border-light": "#e2e8f0",
+              "border-dark": "#334155"
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full">
+<aside class="no-print sticky top-0 flex h-screen w-64 flex-col border-r border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="A circular abstract image representing the Miller family." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAHgBIFvBceYIKc_5RhyzBnrSeJkT_55hXi2uPA-76yZ-lzgtQLR2uIcKUWpDndv2NQZVue1x172OOP-GYdB3ieoufehCBKdOQcecdxIqiri1jjlos1c9RWMz1p-25dAfsK8oYdHBuzk1ap-PwJ-JhPLIoWuIwGVIgovvr2lcAM71mYALak4xW9JE-9BF0HuzOtIVvi4-e76cHju_NB-mppG9YYiJJCibMJyF6yJ_t2eGghrtZ5npPyvXVGoN2cMdZqmigQ6hgjU8Iv");'></div>
+<div class="flex flex-col">
+<h1 class="font-medium leading-normal text-text-light dark:text-text-dark">The Miller Family</h1>
+<p class="text-sm font-normal leading-normal text-accent-light dark:text-accent-dark">Family Health Plan</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-text-light dark:text-text-dark hover:bg-subtle-light dark:hover:bg-subtle-dark" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-text-light dark:text-text-dark hover:bg-subtle-light dark:hover:bg-subtle-dark" href="#">
+<span class="material-symbols-outlined text-xl">pill</span>
+<p class="text-sm font-medium leading-normal">Medications</p>
+</a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-text-light dark:text-text-dark hover:bg-subtle-light dark:hover:bg-subtle-dark" href="#">
+<span class="material-symbols-outlined text-xl">calendar_month</span>
+<p class="text-sm font-medium leading-normal">Appointments</p>
+</a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-text-light dark:text-text-dark hover:bg-subtle-light dark:hover:bg-subtle-dark" href="#">
+<span class="material-symbols-outlined text-xl">monitor_heart</span>
+<p class="text-sm font-medium leading-normal">Health Data</p>
+</a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 bg-subtle-light dark:bg-subtle-dark text-primary" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<p class="text-sm font-medium leading-normal text-text-light dark:text-text-dark">AI Reports</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] w-full">
+<span class="truncate">Add Member</span>
+</button>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-text-light dark:text-text-dark hover:bg-subtle-light dark:hover:bg-subtle-dark" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-text-light dark:text-text-dark hover:bg-subtle-light dark:hover:bg-subtle-dark" href="#">
+<span class="material-symbols-outlined text-xl">help</span>
+<p class="text-sm font-medium leading-normal">Help Center</p>
+</a>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto">
+<div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+<header class="flex flex-wrap items-start justify-between gap-4 border-b border-border-light dark:border-border-dark pb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-4xl font-black leading-tight tracking-[-0.033em] text-text-light dark:text-text-dark">AI Health Roadmap &amp; Reports</h1>
+<p class="text-base font-normal leading-normal text-accent-light dark:text-accent-dark">Monthly AI-driven summaries and health forecasts for Jane Miller.</p>
+</div>
+<button class="no-print flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-subtle-light dark:bg-subtle-dark text-text-light dark:text-text-dark text-sm font-bold leading-normal tracking-[0.015em]" onclick="window.print()">
+<span class="material-symbols-outlined text-lg">print</span>
+<span class="truncate">Print to PDF</span>
+</button>
+</header>
+<div class="mt-6 flex flex-col gap-6 md:flex-row">
+<div class="no-print flex flex-wrap items-center gap-2">
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 pl-3 pr-3 text-primary dark:text-white">
+<p class="text-sm font-medium leading-normal">Jane Miller</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-subtle-light dark:bg-subtle-dark pl-3 pr-3 text-accent-light dark:text-accent-dark hover:bg-primary/20 dark:hover:bg-primary/30 hover:text-primary dark:hover:text-white">
+<p class="text-sm font-medium leading-normal">John Miller</p>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-subtle-light dark:bg-subtle-dark pl-3 pr-3 text-accent-light dark:text-accent-dark hover:bg-primary/20 dark:hover:bg-primary/30 hover:text-primary dark:hover:text-white">
+<p class="text-sm font-medium leading-normal">Sam Miller</p>
+</button>
+</div>
+<div class="no-print flex-1 overflow-x-auto">
+<div class="flex border-b border-border-light dark:border-border-dark gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary pb-3 pt-1 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em] text-primary dark:text-white">Oct 2024</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent pb-3 pt-1 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em] text-accent-light dark:text-accent-dark">Sep 2024</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent pb-3 pt-1 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em] text-accent-light dark:text-accent-dark">Aug 2024</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent pb-3 pt-1 whitespace-nowrap" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em] text-accent-light dark:text-accent-dark">Jul 2024</p>
+</a>
+</div>
+</div>
+</div>
+<article class="printable-content mt-8 space-y-8">
+<section class="print-card rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-6 @container">
+<header>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-text-light dark:text-text-dark">Executive Summary: October 2024</h2>
+<p class="mt-1 text-accent-light dark:text-accent-dark">A high-level overview of Jane's health this month.</p>
+</header>
+<div class="mt-4 text-base font-normal leading-relaxed text-accent-light dark:text-accent-dark">
+<p>This month shows consistent improvement in daily activity levels and stable vital signs. Medication adherence was excellent, though a slight increase in resting heart rate was noted in the third week, warranting observation. Overall, October reflects a positive trajectory with strong adherence to the prescribed health plan.</p>
+</div>
+</section>
+<section class="print-card rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-6 @container">
+<header>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-text-light dark:text-text-dark">Key Health Trends</h2>
+<p class="mt-1 text-accent-light dark:text-accent-dark">Analysis of vital signs and activity data.</p>
+</header>
+<div class="mt-4 flex flex-col gap-6 md:flex-row">
+<div class="flex-1 space-y-4">
+<h3 class="font-semibold text-text-light dark:text-text-dark">Vital Signs</h3>
+<ul class="list-disc space-y-2 pl-5 text-accent-light dark:text-accent-dark">
+<li><strong>Blood Pressure:</strong> Remained stable within the target range of 120/80 mmHg.</li>
+<li><strong>Resting Heart Rate:</strong> Averaged 72 bpm, with a temporary increase to 78 bpm in week 3.</li>
+<li><strong>Activity Levels:</strong> Daily step count increased by 15% compared to September, averaging 6,500 steps/day.</li>
+</ul>
+</div>
+<div class="w-full md:w-1/2">
+<div class="aspect-video w-full rounded-lg bg-cover bg-center" data-alt="A line graph showing a slight increase in resting heart rate during October." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMCI29DQuceADF7RuRxyIBsg3EW8boJ1HMc6Zp9_rnQwQMRbpLmmVce5AHKvySBb-MMCEx4iwstnOopLVY9ttgR7lpr6N-fpRd0Z0EFDpOKTtxq3Hbd_A5ksO43JvYcoPnXJ47HOvFf98RfS09QFskj3jQiOwdhFLVrWE1zF1MyeeDBEMTnux12sSc7IU204z9lZDoC1NdHyuNjaqgLGigHaK70AduPGaOMk-0DKp8SXIZ_UdTGIDLGqpCpmtQnyHQMzNLEtr8RWiM");'></div>
+<p class="text-center text-sm text-accent-light dark:text-accent-dark mt-2">Resting Heart Rate (bpm) - Oct 2024</p>
+</div>
+</div>
+</section>
+<section class="print-card rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-6 @container">
+<header>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-text-light dark:text-text-dark">AI-Generated Insights &amp; Outlook</h2>
+<p class="mt-1 text-accent-light dark:text-accent-dark">Recommendations for the upcoming month.</p>
+</header>
+<div class="mt-4 space-y-4 text-base font-normal leading-relaxed text-accent-light dark:text-accent-dark">
+<p><strong>Positive Developments:</strong> The consistent increase in physical activity is a significant positive indicator and directly correlates with improved sleep quality metrics observed this month.</p>
+<p><strong>Areas for Focus:</strong> Monitor the resting heart rate. While not alarming, the slight increase suggests checking for potential factors like stress, caffeine intake, or changes in sleep patterns. We recommend focusing on stress-reduction activities in November.</p>
+<p><strong>Forward-Looking Goals:</strong> Aim to maintain the current activity level and incorporate at least 10 minutes of daily mindfulness or meditation to support cardiovascular health.</p>
+</div>
+</section>
+<footer class="print-card rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-6 @container">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<p class="text-sm text-accent-light dark:text-accent-dark">
+                                Disclaimer: This AI-generated report is for informational purposes only and is not a substitute for professional medical advice.
+                            </p>
+<button class="no-print flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-primary text-white text-sm font-medium leading-normal">
+<span class="truncate">View Raw Data</span>
+</button>
+</div>
+</footer>
+</article>
+</div>
+</main>
+</div>
+</body></html>

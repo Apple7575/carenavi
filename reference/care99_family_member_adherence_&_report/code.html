@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Medication Adherence Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6", // Updated from Emerald/Teal to Blue
+                        "background-light": "#f8fafc", // Off-white from user request
+                        "background-dark": "#10221f",
+                        "text-light": "#1a202c", // Dark gray from user request
+                        "text-dark": "#f8fafc",
+                        "border-light": "#e2e8f0", // Subtle light gray from user request
+                        "border-dark": "#2d3748",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1a2b28",
+                        "accent-success": "#10b981", // Emerald
+                        "accent-warning": "#f59e0b", // Amber
+                        "accent-danger": "#ef4444", // Muted Red
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem", // Shadcn-like default
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="flex min-h-screen w-full">
+<aside class="flex h-screen w-64 flex-col justify-between border-r border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 p-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar for Alex Chen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDTrzkTpQHIEBdEVx2OQnofYRB39U-C5hcLVZ5b8M4msg5ANoDRextu_Bfold41CogDZhvORQuXQOsKU6aM7Or1YbBJSGsCQCSOzjgQBgaRy7AC9H-gA6E5ndzCL1rljAYqKYYqJqkRgvw5XCvPXgkeyfJ0vAApvBp6e1pD-Wc1Az37qTqBg8WeCEDmd3OswkMAJQw8SqBhnfDZunAWPhygQ5Gem08mPmxh57UTvQcPkk3dg4mbEjBEby621avJwgk4EYJ-9v27xIwM");'></div>
+<div class="flex flex-col">
+<h1 class="text-base font-semibold">Alex Chen</h1>
+<p class="text-sm text-text-light/70 dark:text-text-dark/70">Family Manager</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 rounded px-3 py-2 text-text-light/70 dark:text-text-dark/70 hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 rounded bg-primary/10 px-3 py-2 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<p class="text-sm font-medium">Family Members</p>
+</a>
+<a class="flex items-center gap-3 rounded px-3 py-2 text-text-light/70 dark:text-text-dark/70 hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined">medication</span>
+<p class="text-sm font-medium">Medication</p>
+</a>
+<a class="flex items-center gap-3 rounded px-3 py-2 text-text-light/70 dark:text-text-dark/70 hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined">lab_profile</span>
+<p class="text-sm font-medium">Reports</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded px-3 py-2 text-text-light/70 dark:text-text-dark/70 hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+<a class="flex items-center gap-3 rounded px-3 py-2 text-text-light/70 dark:text-text-dark/70 hover:bg-primary/10 hover:text-primary" href="#">
+<span class="material-symbols-outlined">logout</span>
+<p class="text-sm font-medium">Log Out</p>
+</a>
+</div>
+</aside>
+<main class="flex-1 p-6 lg:p-10">
+<div class="mx-auto max-w-7xl">
+<div class="flex flex-wrap items-center gap-2 text-sm font-medium text-text-light/60 dark:text-text-dark/60">
+<a class="hover:text-primary" href="#">Home</a>
+<span>/</span>
+<a class="hover:text-primary" href="#">Family Members</a>
+<span>/</span>
+<a class="hover:text-primary" href="#">Jane Doe</a>
+<span>/</span>
+<span class="text-text-light dark:text-text-dark">Medication Adherence</span>
+</div>
+<div class="mt-4 flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl font-bold tracking-tight">Jane Doe's Medication Adherence</h1>
+<p class="text-text-light/70 dark:text-text-dark/70">Review and manage medication history and reports.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+<span class="material-symbols-outlined" style="font-size: 20px;">share</span>
+                        Share Report
+                    </button>
+<button class="flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+<span class="material-symbols-outlined" style="font-size: 20px;">download</span>
+                        Download Report (PDF)
+                    </button>
+</div>
+</div>
+<div class="mt-6 flex flex-wrap items-center justify-between gap-4 border-b border-border-light dark:border-border-dark pb-4">
+<div class="flex items-center gap-3">
+<label class="text-sm font-medium" for="member-select">Viewing for:</label>
+<div class="relative">
+<select class="w-48 appearance-none rounded border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark py-2 pl-3 pr-8 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" id="member-select">
+<option>Jane Doe</option>
+<option>John Doe</option>
+<option>Baby Doe</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-text-light/50 dark:text-text-dark/50" style="font-size: 20px;">unfold_more</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 whitespace-nowrap rounded bg-primary/10 px-3 text-sm font-medium text-primary">Last 7 Days</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 whitespace-nowrap rounded px-3 text-sm font-medium text-text-light/70 dark:text-text-dark/70 hover:bg-primary/10 hover:text-primary">Last 30 Days</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 whitespace-nowrap rounded px-3 text-sm font-medium text-text-light/70 dark:text-text-dark/70 hover:bg-primary/10 hover:text-primary">Last 90 Days</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 whitespace-nowrap rounded border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark px-3 text-sm font-medium text-text-light/70 dark:text-text-dark/70 hover:border-primary">
+                        Custom Range
+                        <span class="material-symbols-outlined text-text-light/50 dark:text-text-dark/50" style="font-size: 20px;">calendar_today</span>
+</button>
+</div>
+</div>
+<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<div class="rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-6">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-text-light/70 dark:text-text-dark/70">Overall Adherence</p>
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+</div>
+<p class="mt-1 text-3xl font-bold">96%</p>
+</div>
+<div class="rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-6">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-text-light/70 dark:text-text-dark/70">Doses Taken</p>
+<span class="material-symbols-outlined text-primary">pill</span>
+</div>
+<p class="mt-1 text-3xl font-bold">65 / 68</p>
+</div>
+<div class="rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-6">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-text-light/70 dark:text-text-dark/70">Doses Missed</p>
+<span class="material-symbols-outlined text-accent-danger">cancel</span>
+</div>
+<p class="mt-1 text-3xl font-bold">3</p>
+</div>
+</div>
+<div class="mt-8 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark">
+<div class="p-6">
+<h2 class="text-lg font-semibold">Detailed Log</h2>
+<p class="text-sm text-text-light/70 dark:text-text-dark/70">Medication history for the last 7 days.</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="border-b border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark">
+<tr>
+<th class="px-6 py-3 font-medium">Date</th>
+<th class="px-6 py-3 font-medium">Time</th>
+<th class="px-6 py-3 font-medium">Medication</th>
+<th class="px-6 py-3 font-medium">Dosage</th>
+<th class="px-6 py-3 font-medium">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-border-light dark:border-border-dark">
+<td class="px-6 py-4">Oct 26, 2023</td>
+<td class="px-6 py-4">08:00 AM</td>
+<td class="px-6 py-4 font-medium">Lisinopril</td>
+<td class="px-6 py-4">10mg</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300">
+<span class="size-1.5 rounded-full bg-accent-success"></span>
+                                        Taken
+                                    </span>
+</td>
+</tr>
+<tr class="border-b border-border-light dark:border-border-dark">
+<td class="px-6 py-4">Oct 26, 2023</td>
+<td class="px-6 py-4">08:00 PM</td>
+<td class="px-6 py-4 font-medium">Metformin</td>
+<td class="px-6 py-4">500mg</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300">
+<span class="size-1.5 rounded-full bg-accent-success"></span>
+                                        Taken
+                                    </span>
+</td>
+</tr>
+<tr class="border-b border-border-light dark:border-border-dark">
+<td class="px-6 py-4">Oct 25, 2023</td>
+<td class="px-6 py-4">08:00 AM</td>
+<td class="px-6 py-4 font-medium">Lisinopril</td>
+<td class="px-6 py-4">10mg</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300">
+<span class="size-1.5 rounded-full bg-accent-danger"></span>
+                                        Missed
+                                    </span>
+</td>
+</tr>
+<tr class="border-b border-border-light dark:border-border-dark">
+<td class="px-6 py-4">Oct 25, 2023</td>
+<td class="px-6 py-4">08:00 PM</td>
+<td class="px-6 py-4 font-medium">Metformin</td>
+<td class="px-6 py-4">500mg</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300">
+<span class="size-1.5 rounded-full bg-accent-success"></span>
+                                        Taken
+                                    </span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4">Oct 24, 2023</td>
+<td class="px-6 py-4">08:00 AM</td>
+<td class="px-6 py-4 font-medium">Lisinopril</td>
+<td class="px-6 py-4">10mg</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 dark:bg-amber-900/50 px-2 py-1 text-xs font-medium text-amber-700 dark:text-amber-300">
+<span class="size-1.5 rounded-full bg-accent-warning"></span>
+                                        Late (08:32 AM)
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

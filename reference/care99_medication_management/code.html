@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Medication Management - Care99</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#3B82F6",
+              "background-light": "#F8FAFC",
+              "background-dark": "#10221f",
+              "text-light-primary": "#1E293B",
+              "text-light-secondary": "#64748B",
+              "border-light": "#E2E8F0",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "0.75rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light">
+<div class="relative flex min-h-screen w-full">
+<aside class="flex flex-col w-64 bg-white border-r border-border-light">
+<div class="flex flex-col p-4 gap-4 flex-grow">
+<div class="flex gap-3 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Family avatar with an abstract green and teal pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHVr5vmvdsR4hHLPk8luQb5oBFo8PyQsVm4Je9k5rS3dwTTVriI85vGYJQYxTp--10EgUYbGOAoo7BRCgmiec70YPBdmJ9TNTLhRFPA6rTGWSlgHaLu8w5_eUBSkmSnxyx84YB6Rp_zlQ9WWrcy6yk-yBLFMQ8BrdcGbNog5BRrrgFeQVT_1YqJ7ksy7mU5Z1BhXazHfrM4LoZNwkHgfrljYRBAEQn-6jvLH_Mmog37DesEPCvp-0NvWkKvislXvvt1Rg-4NRlPevL");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-light-primary text-base font-medium leading-normal">The Miller Family</h1>
+<p class="text-text-light-secondary text-sm font-normal leading-normal">Family Health Plan</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100" href="#">
+<span class="material-symbols-outlined text-text-light-primary">dashboard</span>
+<p class="text-text-light-primary text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined !font-bold">pill</span>
+<p class="font-bold text-sm leading-normal">Medication</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100" href="#">
+<span class="material-symbols-outlined text-text-light-primary">calendar_month</span>
+<p class="text-text-light-primary text-sm font-medium leading-normal">Appointments</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100" href="#">
+<span class="material-symbols-outlined text-text-light-primary">monitor_heart</span>
+<p class="text-text-light-primary text-sm font-medium leading-normal">Health Data</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100" href="#">
+<span class="material-symbols-outlined text-text-light-primary">bar_chart</span>
+<p class="text-text-light-primary text-sm font-medium leading-normal">Reports</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4 p-4 border-t border-border-light">
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-colors">
+<span class="truncate">Add Family Member</span>
+</button>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100" href="#">
+<span class="material-symbols-outlined text-text-light-primary">settings</span>
+<p class="text-text-light-primary text-sm font-medium leading-normal">Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100" href="#">
+<span class="material-symbols-outlined text-text-light-primary">help</span>
+<p class="text-text-light-primary text-sm font-medium leading-normal">Help</p>
+</a>
+</div>
+</div>
+</aside>
+<main class="flex-1 p-8 overflow-y-auto">
+<div class="max-w-7xl mx-auto">
+<header class="flex flex-wrap justify-between items-center gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-text-light-primary text-3xl font-bold leading-tight tracking-tight">Medication Management</h1>
+<p class="text-text-light-secondary text-base font-normal leading-normal">Track and manage your family's medication schedules and adherence.</p>
+</div>
+<button class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-colors">
+<span class="material-symbols-outlined">add</span>
+<span class="truncate">Add New Medication</span>
+</button>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="flex">
+<div class="flex h-10 items-center justify-center rounded-lg bg-gray-100 p-1">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-4 has-[:checked]:bg-white has-[:checked]:shadow-sm has-[:checked]:text-text-light-primary text-text-light-secondary text-sm font-medium leading-normal">
+<span class="truncate">Calendar</span>
+<input checked="" class="invisible w-0" name="view-toggle" type="radio" value="Calendar"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-4 has-[:checked]:bg-white has-[:checked]:shadow-sm has-[:checked]:text-text-light-primary text-text-light-secondary text-sm font-medium leading-normal">
+<span class="truncate">List</span>
+<input class="invisible w-0" name="view-toggle" type="radio" value="List"/>
+</label>
+</div>
+</div>
+<div class="bg-white p-4 sm:p-6 rounded-xl border border-border-light">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-4">
+<button class="flex size-9 items-center justify-center rounded-md hover:bg-gray-100 transition-colors">
+<span class="material-symbols-outlined text-text-light-secondary text-lg">chevron_left</span>
+</button>
+<p class="text-text-light-primary text-base font-bold leading-tight">July 2024</p>
+<button class="flex size-9 items-center justify-center rounded-md hover:bg-gray-100 transition-colors">
+<span class="material-symbols-outlined text-text-light-secondary text-lg">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-7 gap-y-1">
+<p class="text-text-light-secondary text-xs font-bold text-center h-10 flex items-center justify-center">SUN</p>
+<p class="text-text-light-secondary text-xs font-bold text-center h-10 flex items-center justify-center">MON</p>
+<p class="text-text-light-secondary text-xs font-bold text-center h-10 flex items-center justify-center">TUE</p>
+<p class="text-text-light-secondary text-xs font-bold text-center h-10 flex items-center justify-center">WED</p>
+<p class="text-text-light-secondary text-xs font-bold text-center h-10 flex items-center justify-center">THU</p>
+<p class="text-text-light-secondary text-xs font-bold text-center h-10 flex items-center justify-center">FRI</p>
+<p class="text-text-light-secondary text-xs font-bold text-center h-10 flex items-center justify-center">SAT</p>
+<div class="h-16 w-full text-gray-400 p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">30</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="border-2 border-green-500 flex flex-col items-center justify-center rounded-lg h-full">1</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="border-2 border-green-500 flex flex-col items-center justify-center rounded-lg h-full">2</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="border-2 border-orange-400 flex flex-col items-center justify-center rounded-lg h-full">3</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="border-2 border-green-500 flex flex-col items-center justify-center rounded-lg h-full">4</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="bg-primary text-white flex flex-col items-center justify-center rounded-lg h-full font-bold">5</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="border-2 border-red-500 flex flex-col items-center justify-center rounded-lg h-full">6</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="border-2 border-green-500 flex flex-col items-center justify-center rounded-lg h-full">7</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">8</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">9</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">10</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">11</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">12</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">13</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">14</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">15</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">16</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">17</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">18</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">19</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">20</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">21</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">22</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">23</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">24</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">25</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">26</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">27</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">28</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">29</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">30</div></div>
+<div class="h-16 w-full text-text-light-primary p-1"><div class="flex flex-col items-center justify-center rounded-lg h-full">31</div></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h3 class="text-text-light-primary text-xl font-bold leading-tight tracking-tight px-1">Today's Medications</h3>
+<div class="bg-white p-4 rounded-xl border border-border-light flex items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="bg-blue-100 rounded-full size-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">pill</span>
+</div>
+<div>
+<p class="font-bold text-text-light-primary">Metformin</p>
+<p class="text-sm text-text-light-secondary">500mg, Twice Daily</p>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg text-sm font-semibold text-primary bg-blue-50 border border-blue-200 hover:bg-blue-100 transition-colors">Mark as Taken</button>
+</div>
+<div class="bg-white p-4 rounded-xl border border-border-light flex items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="bg-amber-100 rounded-full size-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-500 text-3xl">pill_off</span>
+</div>
+<div>
+<p class="font-bold text-text-light-primary">Lisinopril</p>
+<p class="text-sm text-text-light-secondary">10mg, Once Daily</p>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg text-sm font-semibold text-amber-600 bg-amber-50 border border-amber-200 hover:bg-amber-100 transition-colors">Marked as Skipped</button>
+</div>
+<div class="bg-white p-4 rounded-xl border border-border-light flex items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="bg-gray-100 rounded-full size-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-500 text-3xl">check_circle</span>
+</div>
+<div>
+<p class="font-bold text-text-light-primary">Atorvastatin</p>
+<p class="text-sm text-text-light-secondary">20mg, Once Daily (Evening)</p>
+</div>
+</div>
+<span class="px-4 py-2 rounded-lg text-sm font-semibold text-gray-600 bg-gray-50 border border-gray-200">Taken at 8:15 PM</span>
+</div>
+</div>
+</div>
+<aside class="lg:col-span-1">
+<div class="bg-white p-6 rounded-xl border border-border-light sticky top-8">
+<h3 class="text-text-light-primary text-xl font-bold leading-tight tracking-tight">AI Pill Identifier</h3>
+<p class="text-text-light-secondary text-sm mt-1 mb-6">Instantly identify pills from an image.</p>
+<div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-primary hover:bg-blue-50/50 transition-colors">
+<div class="bg-primary/10 rounded-full p-3 mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<p class="font-semibold text-text-light-primary">Click to upload or drag &amp; drop</p>
+<p class="text-xs text-text-light-secondary mt-1">PNG, JPG or WEBP (max 5MB)</p>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4 hidden" id="add-medication-modal">
+<div class="bg-white rounded-xl shadow-2xl w-full max-w-md">
+<div class="p-6 border-b border-border-light">
+<h2 class="text-xl font-bold text-text-light-primary">Add New Medication</h2>
+<p class="text-sm text-text-light-secondary mt-1">Enter the details for the new prescription.</p>
+</div>
+<form class="p-6 space-y-4">
+<div>
+<label class="block text-sm font-medium text-text-light-primary mb-1" for="med-name">Medication Name</label>
+<input class="w-full border-border-light rounded-md shadow-sm focus:ring-primary focus:border-primary" id="med-name" placeholder="e.g., Ibuprofen" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-text-light-primary mb-1" for="med-dosage">Dosage</label>
+<input class="w-full border-border-light rounded-md shadow-sm focus:ring-primary focus:border-primary" id="med-dosage" placeholder="e.g., 200mg" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-text-light-primary mb-1" for="med-frequency">Frequency</label>
+<select class="w-full border-border-light rounded-md shadow-sm focus:ring-primary focus:border-primary" id="med-frequency">
+<option>Once Daily</option>
+<option>Twice Daily</option>
+<option>Three Times Daily</option>
+<option>As Needed</option>
+</select>
+</div>
+</form>
+<div class="px-6 py-4 bg-gray-50 border-t border-border-light flex justify-end gap-3 rounded-b-xl">
+<button class="px-4 py-2 rounded-lg text-sm font-semibold text-text-light-secondary bg-white border border-gray-300 hover:bg-gray-100 transition-colors" type="button">Cancel</button>
+<button class="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-blue-600 transition-colors" type="submit">Save Medication</button>
+</div>
+</div>
+</div>
+</body></html>

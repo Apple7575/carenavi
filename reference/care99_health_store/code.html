@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Care99 Health Store</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#3b82f6",
+              "background-light": "#f6f8f8",
+              "background-dark": "#10221f",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<header class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm">
+<div class="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2" href="#">
+<svg class="h-6 w-6 text-blue-500" fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"></path>
+</svg>
+<h2 class="text-lg font-bold text-slate-900 dark:text-slate-50">Care99</h2>
+</a>
+<nav class="hidden items-center gap-6 md:flex">
+<a class="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-50" href="#">Dashboard</a>
+<a class="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-50" href="#">Medications</a>
+<a class="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-50" href="#">Appointments</a>
+<a class="text-sm font-bold text-blue-500" href="#">Health Store</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400">search</span>
+<input class="h-9 w-full rounded-lg border border-slate-200 bg-white pl-10 pr-4 text-sm placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:border-slate-800 dark:bg-slate-900 dark:placeholder:text-slate-400 dark:focus:ring-blue-500" placeholder="Search..." type="search"/>
+</div>
+<button class="flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="h-9 w-9 rounded-full bg-cover bg-center" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBVZvJjSL8JCGzxvGbPB_Uz7-o7rNHRL7DRJOwVCBRbL5oY5O5Lq6FARBqQYGBqmfzA_GINe_1XO9FWTt0ZRmnxV2lfzpgVoRO7jlu2BN74xdf5qm2ziP3rOdWniNznBTND-apSDvj2oKdCNACvbWXbzmlZFM9zUYY8sljrpLkdDVmut0jWFe35R5ZGtI3-RzuuthY0e_Yf0s5fJ8qXjjoRYOWNEyoN7vtapy6ZxM8u63LcRBc_ggaTk8LjH6eoepDl24dYUNfMZ6s4");'></div>
+</div>
+</div>
+</header>
+<main class="container mx-auto max-w-7xl flex-1 px-4 sm:px-6 lg:px-8 py-8">
+<div class="mb-8">
+<div class="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-2">
+<a class="hover:text-blue-500" href="#">Home</a>
+<span class="mx-2">/</span>
+<a class="hover:text-blue-500" href="#">Health Store</a>
+<span class="mx-2">/</span>
+<span class="font-medium text-slate-700 dark:text-slate-200">All Products</span>
+</div>
+<h1 class="text-4xl font-black tracking-tight text-slate-900 dark:text-slate-50">Recommended Health Devices</h1>
+<p class="mt-2 text-lg text-slate-600 dark:text-slate-400">Find curated health products for your family's needs.</p>
+</div>
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
+<aside class="lg:col-span-1">
+<div class="sticky top-24 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-6">
+<h3 class="text-lg font-semibold text-slate-900 dark:text-slate-50">Filter Products</h3>
+<div class="mt-4 space-y-4">
+<div>
+<h4 class="font-medium text-slate-700 dark:text-slate-300">Categories</h4>
+<ul class="mt-2 space-y-1">
+<li><a class="block rounded-md px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 dark:bg-blue-900/50 dark:text-blue-400" href="#">All Products</a></li>
+<li><a class="block rounded-md px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800" href="#">Blood Pressure Monitors</a></li>
+<li><a class="block rounded-md px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800" href="#">Scales</a></li>
+<li><a class="block rounded-md px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800" href="#">Thermometers</a></li>
+<li><a class="block rounded-md px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800" href="#">First Aid Kits</a></li>
+<li><a class="block rounded-md px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800" href="#">Supplements</a></li>
+</ul>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-800 pt-4">
+<button class="w-full h-10 inline-flex items-center justify-center rounded-lg text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 dark:text-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700">Clear Filters</button>
+</div>
+</div>
+</div>
+</aside>
+<div class="lg:col-span-3">
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/50 transition-shadow hover:shadow-lg dark:hover:shadow-slate-800/60">
+<div class="aspect-square w-full bg-slate-100 dark:bg-slate-800 p-4">
+<div class="h-full w-full bg-contain bg-center bg-no-repeat" data-alt="Omron Evolv Wireless Blood Pressure Monitor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8KGLHL9IZNOyJiEieiOiFJQ5q1rYrDL-566cQOEoqHNBgugoZ4sFNNQ21dzShGrx5-EHKbBrj6XKBrckm9NZvaxvJFhEXeNiSN03qpfGOj4yIzyZ0pkN6DEusKMM3j0-nqymd3MNN2BA0BY8zjqdO-SqLe6LZxg-imJicXT4t92cnGv6QGZ95HeuLBLdExFEwR_XA8cmvEfXyLD3F79RMKEOWgiJYxaYeBjWmb506_VFMh7SMqm4yerIHivJo_E9v6RSTaG3BaXRK")'></div>
+</div>
+<div class="flex-1 p-4">
+<h3 class="font-semibold text-slate-800 dark:text-slate-100">Omron Evolv Wireless</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Omron</p>
+<p class="mt-2 font-semibold text-lg text-blue-600 dark:text-blue-400">$89.99</p>
+</div>
+</div>
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/50 transition-shadow hover:shadow-lg dark:hover:shadow-slate-800/60">
+<div class="aspect-square w-full bg-slate-100 dark:bg-slate-800 p-4">
+<div class="h-full w-full bg-contain bg-center bg-no-repeat" data-alt="Withings Body+ Smart Scale" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDx1_4BdrnWFgAU6Hm-95Iz1afpQ0OzI83lq7fiUcwUrb_CDpDnHdU1gKNIrJfY6vFktBL_o-MFt4Gn5r1dL939DudwtK1uS84kn50yc7mwnFf5nyuSj1xjmO2pPu6RpLdOQ4RDWiHZxEr1dFabHFRYqhvrjaGIP68Nqkgryqm7M6hOonWVfn6HWVPycktVVts0k171_N9SQzLmTWQTIORp0s1-DMrYEbqVZf1LLt2aE2gjYBdSIxDb3S9BWYlVvAttxRg4SdvEMtsM")'></div>
+</div>
+<div class="flex-1 p-4">
+<h3 class="font-semibold text-slate-800 dark:text-slate-100">Withings Body+ Smart Scale</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Withings</p>
+<p class="mt-2 font-semibold text-lg text-blue-600 dark:text-blue-400">$99.95</p>
+</div>
+</div>
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/50 transition-shadow hover:shadow-lg dark:hover:shadow-slate-800/60">
+<div class="aspect-square w-full bg-slate-100 dark:bg-slate-800 p-4">
+<div class="h-full w-full bg-contain bg-center bg-no-repeat" data-alt="Braun ThermoScan 7 Digital Thermometer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBWfiDwZgYqjloBnHeaIJ5VHF5a0wh1CA1IDjGUcK8ZIrXAYBUWI1gRSdANJWrH1zxhroZRf64DRUvDuVH-GLLbMTnp8tDua1f7g9UnPi3x0gZW7oZbHuAfMf_hNxthY4In0IlqXdgcr4-xsGVWf-mrDTppVwkJ8qM4X3U1kQ1KuBU02LXFtrkKZ8datsEoNwFzZbQ51CC4iMyYVZu_Ox7Aliiz4YND7HF16Xyv6NefjnnZf2ncJpcceevAtoPzzIQtkd4AOItAcOmY")'></div>
+</div>
+<div class="flex-1 p-4">
+<h3 class="font-semibold text-slate-800 dark:text-slate-100">Braun ThermoScan 7</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Braun</p>
+<p class="mt-2 font-semibold text-lg text-blue-600 dark:text-blue-400">$59.99</p>
+</div>
+</div>
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/50 transition-shadow hover:shadow-lg dark:hover:shadow-slate-800/60">
+<div class="aspect-square w-full bg-slate-100 dark:bg-slate-800 p-4">
+<div class="h-full w-full bg-contain bg-center bg-no-repeat" data-alt="First Aid Only All-Purpose Kit" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJskrW5zSdkmrrxPdWfp6bYDFAzfAjOcOA6nItksbE6CMPxWsSIuazWoBv-NtfycyACv-Yn1H1yjw3j_4JbXKKnNESnbumbGacfdA_zihTNsYQESmtNOGj9uebIrhaztnxa7bm0qTxA9ZQsLM7yuJ8BiOWOZnDJLgPnwqC2Uy2K3sWyYZMb3bkn5pV3uAbnk08qhhtC8RWXCLGFP9QWL1ijYQi7O1VILQw40bkm9oYlN_jbStAgntfcd2BSY42H8GOJ5keYs8Nbr5R")'></div>
+</div>
+<div class="flex-1 p-4">
+<h3 class="font-semibold text-slate-800 dark:text-slate-100">First Aid Only Kit</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">First Aid Only</p>
+<p class="mt-2 font-semibold text-lg text-blue-600 dark:text-blue-400">$20.50</p>
+</div>
+</div>
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/50 transition-shadow hover:shadow-lg dark:hover:shadow-slate-800/60">
+<div class="aspect-square w-full bg-slate-100 dark:bg-slate-800 p-4">
+<div class="h-full w-full bg-contain bg-center bg-no-repeat" data-alt="iHealth Track Blood Pressure Monitor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPl6nHHD-3KiDdejv5VGvEqhbMM77nb4QlLs8lS9Wsp449l3xHzoqs2rNLkAh_eGGSHlqjFX2VEDtkg15NR5xgSbyvYGFakpnaP4qawrhBDTCd0EGtBJyM6MW1Vvl8YIbvpkLKMdFVmneHl_nekfjLgXTTqzuotwymnWIWO8qbMNwmL80CLhEuHJmmox2n9-C3L5TcuZMwGWbxhWcv6z55knfS3piTKwcPo9AhRzEB4v_RioTJoSa6QL85MU5wNvtD6YYszsX2vqzx")'></div>
+</div>
+<div class="flex-1 p-4">
+<h3 class="font-semibold text-slate-800 dark:text-slate-100">iHealth Track BP Monitor</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">iHealth</p>
+<p class="mt-2 font-semibold text-lg text-blue-600 dark:text-blue-400">$39.99</p>
+</div>
+</div>
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/50 transition-shadow hover:shadow-lg dark:hover:shadow-slate-800/60">
+<div class="aspect-square w-full bg-slate-100 dark:bg-slate-800 p-4">
+<div class="h-full w-full bg-contain bg-center bg-no-repeat" data-alt="Vitamin D3 Supplement Bottles" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCwPr5-MT1E1CtG0QL7dSprbUIak0VO4q7Kx_TTYUzCZpoWtgnKta2D1QWTLHbwkFK_KcwH6lcxjA6K_JvoRDEl6O_lkItq8kwrL5nP20OS9v-PSjgjIAwF3yNAldXQFR9v34eML4D7p17cJ8-w6QYNA0lQ7q9cGHr1U38BybEhQAdGiepamEPMNmYp7obYht_-mE34-TThJCT5qxV8P-haNgFqvrsoUT0P8RBIIRAPPHQ7HdATC02Us9FYJBsdJMuwD5UWOoDGht2z")'></div>
+</div>
+<div class="flex-1 p-4">
+<h3 class="font-semibold text-slate-800 dark:text-slate-100">Vitamin D3 Supplement</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">NatureMade</p>
+<p class="mt-2 font-semibold text-lg text-blue-600 dark:text-blue-400">$15.99</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+<div class="relative w-full max-w-4xl max-h-[90vh] rounded-xl bg-background-light dark:bg-background-dark shadow-2xl dark:shadow-slate-950/50 flex flex-col">
+<button class="absolute top-4 right-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-200/50 text-slate-600 hover:bg-slate-300/70 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:bg-slate-700/70">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+<div class="flex-1 overflow-y-auto p-6 md:p-8">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+<div>
+<div class="aspect-square w-full overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
+<img class="h-full w-full object-contain" data-alt="Omron Evolv Wireless Blood Pressure Monitor main image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAraEPgOD4nBUREa44sBZ2u2RJMQRLxFzYHs8WO9UbZQ989jzOXoDC_z5ohnJkqKUdjgGpHBBiYCIr1sU2E1OigST3qpdY1-wQjOwNMVzYb0CzgBM_PU4Ea9z3ZihGqPZbAXOHMDIoNCYq-Oi-ZboeVq365vMmwJ7Qs_6vPhN9UiO___7EsUHcMoCdC7VGEBe5uYpctoQ3bxyNSdhlSRb8NGwG44N9ZgKAwxsIk467ADRzY6NYQQEFtUI1nnENi3p63wKLdx_LC1mck"/>
+</div>
+<div class="mt-4 grid grid-cols-4 gap-4">
+<div class="aspect-square cursor-pointer overflow-hidden rounded-md border-2 border-blue-500 bg-slate-100 dark:bg-slate-800">
+<img class="h-full w-full object-contain" data-alt="Omron Evolv thumbnail 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4cVKTg_Isrga0EN5xG3-g8KjxU5pQf0phpsQg4tEuyi5PrMkqSml-m3PR9M4RX5q_ySWEZGF8g2oZEBFFedUuEdxPcJvBVZgl2xBwArFpHABUFRXZH1r200yY3Xh77_I7LE55KSnui103_fW5YRoBuxtVqy4GgBRvjuA3Y-aGr0EIgEKY8Fp4kW55A5KrYj2PHMcBVIiIsUHcpc1sDz3jtWpVUTq-_PML_GWlV7aHcK8xSKv4HpYwFBUCMaqn3qJ7cOLW5d5gK9e_"/>
+</div>
+<div class="aspect-square cursor-pointer overflow-hidden rounded-md border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800">
+<img class="h-full w-full object-contain" data-alt="Omron Evolv thumbnail 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8sgpOTSRmCnimpGf7OY6tp_jO_0P0cM1Cx3whUOc9abCgqNe3XsRbyawVa4VJLIOfLZAbGRePJiUCH5QgwA-NCprC6VaSdRjcySNj8PSIzoJSiU5Kd6WWx5WmbnASC5cB_Py_kgBRSmu41NOgs1PY9HykCYxgOdcjoyrPrDwCNDOdDeSQhIMXzWKV0zlkf6UXdUYIveSDONyXBLN59LJ3p5duG3DE3PCiWW0A0tl8-nwb5nm8dXI2CuppRkqgg9RVoAT2VXs7Scnw"/>
+</div>
+<div class="aspect-square cursor-pointer overflow-hidden rounded-md border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800">
+<img class="h-full w-full object-contain" data-alt="Omron Evolv thumbnail 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnsFoDaDVsmdy82AZmA9G3CkzCRVDXuED6k3WO0lDZVEubk3dwAfZ2ZOkI-fBpB7KMvFjc_rm0sv1Be3lCBDrh4rQfWI7lHBSv59ti0VRdDqIxpU8dVNAeScjnM0Ei683TnYkacrhqykyPWETIbWfQFeUZbYNJ3b3HFh92dRCZP8oevnTR9BpGQejaOFj1-GyhPfjsSnnhY1QuYPwJQp3AXPSsaaPL0mlQu-sH7Zk1-jq5HVijHx9rHRT2e2bN9wh0D94MgQNepUps"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Omron Evolv Wireless</h2>
+<p class="mt-1 text-slate-500 dark:text-slate-400">by Omron Healthcare</p>
+<p class="mt-4 text-3xl font-bold text-blue-600 dark:text-blue-400">$89.99</p>
+<p class="mt-4 text-slate-600 dark:text-slate-300">The Evolv is our most portable upper arm monitor ever. The innovative one-piece design takes clinically-accurate measurements without any cumbersome wires or tubes.</p>
+</div>
+<div class="mt-8 flex-1 space-y-4">
+<div class="rounded-lg border border-slate-200 dark:border-slate-800">
+<button class="flex w-full items-center justify-between p-4 focus:outline-none">
+<span class="font-medium text-slate-800 dark:text-slate-100">Product Specifications</span>
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">expand_more</span>
+</button>
+</div>
+<div class="rounded-lg border border-slate-200 dark:border-slate-800">
+<button class="flex w-full items-center justify-between p-4 focus:outline-none">
+<span class="font-medium text-slate-800 dark:text-slate-100">Features</span>
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">expand_more</span>
+</button>
+</div>
+<div class="rounded-lg border border-slate-200 dark:border-slate-800">
+<button class="flex w-full items-center justify-between p-4 focus:outline-none">
+<span class="font-medium text-slate-800 dark:text-slate-100">Disclaimer</span>
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">expand_more</span>
+</button>
+</div>
+</div>
+<div class="mt-8">
+<button class="h-12 w-full inline-flex items-center justify-center gap-2 rounded-lg bg-blue-500 px-6 text-base font-semibold text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-background-dark">
+                                    Buy at Coupang
+                                    <span class="material-symbols-outlined">open_in_new</span>
+</button>
+<p class="mt-2 text-center text-xs text-slate-500 dark:text-slate-400">You will be redirected to an external site to complete your purchase. <br/> Care99 may earn a commission from this link.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

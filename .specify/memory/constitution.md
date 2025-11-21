@@ -1,13 +1,12 @@
 <!--
 Sync Impact Report:
-Version: 1.0.0 → 1.1.0
-Change Type: MINOR - Design system principles added
+Version: 1.1.0 → 1.2.0
+Change Type: MINOR - Design reference guidelines added
 
 Modified Principles: N/A
 Added Sections:
-  - Design System Standards (new principle VI)
-  - Design System specification with color palette, typography, UI components
-  - Technology stack constraints
+  - Design Reference Standards (under Quality Standards)
+  - Reference directory usage guidelines
 
 Removed Sections: N/A
 
@@ -18,8 +17,12 @@ Templates Reviewed:
   ✅ .specify/templates/checklist-template.md - Not reviewed (empty template)
 
 New Artifacts Created:
+  ✅ reference/README.md - Stitch design reference documentation (13 screens cataloged)
+
+Previous Version (1.1.0) Artifacts:
   ✅ global.css - CSS custom properties for design tokens
   ✅ tailwind.config.js - Tailwind CSS configuration with CareNavi design system
+  ✅ .specify/design-system/README.md - Design system documentation
 
 Follow-up TODOs: N/A
 -->
@@ -204,6 +207,37 @@ All UI implementations MUST adhere to the CareNavi design system defined in this
 - Parallel tasks marked [P] MUST have no file or dependency conflicts
 - Foundation phase completion required before any user story work begins
 
+### Design Reference Standards
+
+**Reference Material Location**: `reference/` directory contains Stitch-generated designs
+
+**Usage Rules**:
+- Reference designs are **visual guides only** - NEVER copy code directly
+- ALL implementations MUST use CareNavi design system and SpecKit workflow
+- Reference `screen.png` images to understand layout and user interactions
+- Analyze `code.html` files only to extract:
+  - Layout structure and component hierarchy
+  - Interactive element patterns
+  - Data entity requirements
+  - Information architecture
+- Rebuild ALL components using Shadcn/UI (NOT custom Tailwind from Stitch)
+- Replace Material Symbols icons with Lucide React equivalents
+- Apply CareNavi color tokens (NOT Stitch hardcoded values)
+- Document reference mapping in feature specification
+
+**Workflow Integration**:
+1. Reference design screenshot in `/speckit.specify` prompt
+2. Include reference path in spec.md "Design Reference" section
+3. Map Stitch components to Shadcn/UI in plan.md
+4. Justify any deviations from reference in Complexity Tracking
+
+**Constitutional Violations**:
+- Copying Stitch code without SpecKit workflow is a MAJOR violation
+- Bypassing design system tokens is grounds for implementation rejection
+- Skipping user story creation for reference features violates Principle I
+
+See `reference/README.md` for detailed reference usage guidelines.
+
 ## Governance
 
 ### Constitutional Authority
@@ -246,4 +280,4 @@ For AI agents and developers using this system:
 - Template guidance: `.specify/templates/*.md` files (contains ACTION REQUIRED comments)
 - When guidance conflicts, constitution principles override all other sources
 
-**Version**: 1.1.0 | **Ratified**: 2025-11-21 | **Last Amended**: 2025-11-21
+**Version**: 1.2.0 | **Ratified**: 2025-11-21 | **Last Amended**: 2025-11-21

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Log Blood Pressure</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#3B82F6", // Changed to a consistent shade of blue
+              "background-light": "#F9FAFB",
+              "background-dark": "#111827",
+              "text-light": "#111827",
+              "text-dark": "#F9FAFB",
+              "subtle-light": "#6B7280",
+              "subtle-dark": "#9CA3AF",
+              "border-light": "#E5E7EB",
+              "border-dark": "#374151",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+<div class="absolute inset-0 bg-black/30"></div>
+<div class="relative w-full max-w-lg rounded-xl bg-background-light dark:bg-background-dark shadow-2xl">
+<div class="flex flex-col">
+<div class="border-b border-border-light dark:border-border-dark p-6">
+<div class="flex flex-col gap-1.5">
+<h1 class="text-text-light dark:text-text-dark text-xl font-semibold leading-tight">Log Blood Pressure</h1>
+<p class="text-subtle-light dark:text-subtle-dark text-sm font-normal leading-normal">Enter the reading to track health trends.</p>
+</div>
+</div>
+<div class="flex flex-col gap-6 p-6">
+<div>
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">For</p>
+<div class="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-border-light dark:border-border-dark bg-transparent px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-white/5">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10" data-alt="Avatar of Sarah Johnson" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0P8qds-EnljjjQZkN6-rPMQxWwMdeKTHhc8QH7PrIy9TrtoL0_kMYXhQvluvd82_JyOMwnj7pBogK9tVCg-OjvLutyc5FCiziUqqd95aGxot1fiW-vy1YmYndF_Bap6VghskRd6euBrEMfywNCsCUbRLClxErKmoSAzgGRjzqXGhFdMoLOSF4qLDze92iH3qA5GFjzyiZoE9m_bi4SYL0r2kO5QwCqy0dpvGVYrO4bLx3EZOrBZ8vI5QLAwJZxmUAtpiGaNJtKzRf");'></div>
+<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal flex-1 truncate">Sarah Johnson</p>
+</div>
+<div class="shrink-0 text-subtle-light dark:text-subtle-dark">
+<span class="material-symbols-outlined text-xl">unfold_more</span>
+</div>
+</div>
+</div>
+<div class="flex w-full flex-wrap items-end gap-4">
+<label class="flex flex-col min-w-40 flex-1">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Systolic (SYS)</p>
+<div class="relative flex items-center">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-transparent h-12 placeholder:text-subtle-light dark:placeholder:text-subtle-dark px-3.5 py-2 text-base font-normal leading-normal" placeholder="120" type="number" value=""/>
+<span class="absolute right-3.5 text-sm text-subtle-light dark:text-subtle-dark">mmHg</span>
+</div>
+</label>
+<label class="flex flex-col min-w-40 flex-1">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Diastolic (DIA)</p>
+<div class="relative flex items-center">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-transparent h-12 placeholder:text-subtle-light dark:placeholder:text-subtle-dark px-3.5 py-2 text-base font-normal leading-normal" placeholder="80" type="number" value=""/>
+<span class="absolute right-3.5 text-sm text-subtle-light dark:text-subtle-dark">mmHg</span>
+</div>
+</label>
+</div>
+<div>
+<label class="flex flex-col min-w-40 flex-1">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Date &amp; Time</p>
+<div class="relative flex w-full flex-1 items-center">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-transparent h-12 placeholder:text-subtle-light dark:placeholder:text-subtle-dark px-3.5 py-2 pr-10 text-base font-normal leading-normal" value="2023-10-27 10:30 AM"/>
+<div class="absolute right-0 text-subtle-light dark:text-subtle-dark flex items-center justify-center pr-3.5">
+<span class="material-symbols-outlined text-xl">calendar_month</span>
+</div>
+</div>
+</label>
+</div>
+<div>
+<label class="flex flex-col min-w-40 flex-1">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Notes (Optional)</p>
+<textarea class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-transparent min-h-28 placeholder:text-subtle-light dark:placeholder:text-subtle-dark px-3.5 py-2 text-base font-normal leading-normal" placeholder="e.g., Feeling dizzy, after morning walk"></textarea>
+</label>
+</div>
+</div>
+<div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-border-light dark:border-border-dark p-6 bg-gray-50/50 dark:bg-white/5 rounded-b-xl">
+<button class="flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold text-text-light dark:text-text-dark bg-transparent hover:bg-black/5 dark:hover:bg-white/10 transition-colors">Cancel</button>
+<button class="flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold text-white bg-primary hover:bg-primary/90 transition-colors">Save Reading</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
