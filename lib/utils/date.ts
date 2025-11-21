@@ -6,13 +6,13 @@
 export function formatDate(date: Date | string, format: 'short' | 'long' | 'full' = 'short'): string {
   const d = typeof date === 'string' ? new Date(date) : date;
 
-  const options: Intl.DateTimeFormatOptions = {
+  const optionsMap: Record<string, Intl.DateTimeFormatOptions> = {
     short: { year: 'numeric', month: '2-digit', day: '2-digit' },
     long: { year: 'numeric', month: 'long', day: 'numeric' },
     full: { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' },
-  }[format];
+  };
 
-  return new Intl.DateTimeFormat('ko-KR', options).format(d);
+  return new Intl.DateTimeFormat('ko-KR', optionsMap[format]).format(d);
 }
 
 export function formatTime(date: Date | string): string {
