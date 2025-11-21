@@ -80,6 +80,7 @@ export function useFamily() {
 
   return {
     ...query,
+    familyMembers: query.data,
     createFamily: createFamilyMutation.mutate,
     joinFamily: joinFamilyMutation.mutate,
     removeMember: removeMemberMutation.mutate,
