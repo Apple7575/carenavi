@@ -77,8 +77,12 @@ export async function POST(request: NextRequest) {
 
     console.log('Attempting to insert family:', { name: body.name, created_by: user.id, invite_code: inviteCode });
 
-    // Create family - DISABLE RLS check temporarily to test
-    const { data: family, error: familyError } = await supabase
+    // Use admin client to bypass RLS for family creation
+    const { createAdminClient } = await import('@/lib/supabase/server');
+    const adminClient = createAdminClient();
+
+    // Create family using admin client
+    const { data: family, error: familyError } = await adminClient
       .from('families')
       .insert({
         name: body.name,
@@ -92,8 +96,8 @@ export async function POST(request: NextRequest) {
 
     if (familyError) throw familyError;
 
-    // Add creator as family member
-    const { data: member, error: memberError } = await supabase
+    // Add creator as family member using admin client
+    const { data: member, error: memberError } = await adminClient
       .from('family_members')
       .insert({
         family_id: (family as any).id,
