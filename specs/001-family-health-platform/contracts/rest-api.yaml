@@ -1,0 +1,1504 @@
+openapi: 3.0.3
+info:
+  title: CareNavi API
+  description: |
+    가족 건강 관리 웹 플랫폼 CareNavi의 REST API 명세입니다.
+
+    **인증**: 모든 엔드포인트는 Supabase Auth JWT 토큰을 요구합니다.
+    `Authorization: Bearer <access_token>` 헤더를 포함해야 합니다.
+
+    **에러 처리**: 모든 에러는 RFC 7807 Problem Details 형식으로 반환됩니다.
+  version: 1.0.0
+  contact:
+    name: CareNavi API Support
+    email: support@carenavi.com
+
+servers:
+  - url: https://api.carenavi.com/v1
+    description: Production
+  - url: http://localhost:3000/api
+    description: Local Development
+
+tags:
+  - name: Auth
+    description: 인증 관련 엔드포인트
+  - name: Users
+    description: 사용자 관리
+  - name: Families
+    description: 가족 관리
+  - name: Medications
+    description: 약물 관리
+  - name: Vitals
+    description: 바이탈 관리
+  - name: Reports
+    description: 건강 리포트
+  - name: Products
+    description: 건강 스토어 제품
+  - name: Tasks
+    description: 할 일 관리
+  - name: Dashboard
+    description: 대시보드 데이터
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Supabase Auth JWT 토큰
+
+  schemas:
+    # Common Schemas
+    Error:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+          example: https://api.carenavi.com/errors/validation-error
+        title:
+          type: string
+          example: Validation Error
+        status:
+          type: integer
+          example: 400
+        detail:
+          type: string
+          example: Invalid email format
+        instance:
+          type: string
+          format: uri
+          example: /api/users/profile
+
+    # Entity Schemas
+    User:
+      type: object
+      required:
+        - id
+        - email
+        - full_name
+        - role
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        full_name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        avatar_url:
+          type: string
+          format: uri
+          nullable: true
+        role:
+          type: string
+          enum: [caregiver, patient]
+        preferences:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Family:
+      type: object
+      required:
+        - id
+        - name
+        - created_by
+        - invite_code
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        created_by:
+          type: string
+          format: uuid
+        invite_code:
+          type: string
+          pattern: '^[A-Z2-9]{8}$'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    FamilyMember:
+      type: object
+      required:
+        - id
+        - family_id
+        - user_id
+        - nickname
+        - relationship
+      properties:
+        id:
+          type: string
+          format: uuid
+        family_id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        nickname:
+          type: string
+          minLength: 1
+          maxLength: 50
+        relationship:
+          type: string
+          enum: [self, parent, child, spouse, other]
+        health_score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          nullable: true
+        status:
+          type: string
+          enum: [good, fair, needs_review]
+        joined_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Medication:
+      type: object
+      required:
+        - id
+        - family_id
+        - member_id
+        - name
+        - dosage
+        - frequency
+        - schedule_times
+        - start_date
+      properties:
+        id:
+          type: string
+          format: uuid
+        family_id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        dosage:
+          type: string
+          minLength: 1
+          maxLength: 50
+        frequency:
+          type: string
+          minLength: 1
+          maxLength: 50
+        schedule_times:
+          type: array
+          items:
+            type: string
+            pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+          example: ["09:00", "21:00"]
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+        is_active:
+          type: boolean
+          default: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    MedicationLog:
+      type: object
+      required:
+        - id
+        - medication_id
+        - scheduled_at
+        - status
+      properties:
+        id:
+          type: string
+          format: uuid
+        medication_id:
+          type: string
+          format: uuid
+        scheduled_at:
+          type: string
+          format: date-time
+        taken_at:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: string
+          enum: [pending, taken, skipped]
+        notes:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Vital:
+      type: object
+      required:
+        - id
+        - family_id
+        - member_id
+        - type
+        - value
+        - unit
+        - measured_at
+      properties:
+        id:
+          type: string
+          format: uuid
+        family_id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [blood_pressure, blood_sugar, weight, heart_rate]
+        value:
+          type: string
+          example: "122/80"
+        unit:
+          type: string
+          example: "mmHg"
+        measured_at:
+          type: string
+          format: date-time
+        notes:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    HealthReport:
+      type: object
+      required:
+        - id
+        - family_id
+        - member_id
+        - title
+        - summary
+        - content
+        - period_start
+        - period_end
+      properties:
+        id:
+          type: string
+          format: uuid
+        family_id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        summary:
+          type: string
+          description: Markdown 형식
+        content:
+          type: object
+          properties:
+            medication_adherence:
+              type: object
+              properties:
+                rate:
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                trend:
+                  type: string
+                  enum: [improving, stable, declining]
+            vitals_summary:
+              type: object
+              additionalProperties: true
+            alerts:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    enum: [info, warning, error]
+                  message:
+                    type: string
+        insights:
+          type: array
+          items:
+            type: string
+          nullable: true
+        recommendations:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+          description: Product IDs
+        period_start:
+          type: string
+          format: date
+        period_end:
+          type: string
+          format: date
+        generated_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Product:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - category
+        - price
+        - external_link
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        description:
+          type: string
+        category:
+          type: string
+          enum: [supplement, device, service]
+        price:
+          type: number
+          format: decimal
+          minimum: 0
+        image_url:
+          type: string
+          format: uri
+          nullable: true
+        external_link:
+          type: string
+          format: uri
+        rating:
+          type: number
+          format: decimal
+          minimum: 0
+          maximum: 5
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+        is_active:
+          type: boolean
+          default: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Task:
+      type: object
+      required:
+        - id
+        - family_id
+        - member_id
+        - title
+        - type
+        - due_date
+      properties:
+        id:
+          type: string
+          format: uuid
+        family_id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        description:
+          type: string
+          nullable: true
+        type:
+          type: string
+          enum: [medication, vital, appointment, custom]
+        reference_id:
+          type: string
+          format: uuid
+          nullable: true
+        due_date:
+          type: string
+          format: date
+        due_time:
+          type: string
+          pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+          nullable: true
+        completed:
+          type: boolean
+          default: false
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    DashboardSummary:
+      type: object
+      required:
+        - user
+        - family
+        - today_tasks
+        - family_overview
+        - vitals_quick_view
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        family:
+          $ref: '#/components/schemas/Family'
+        today_tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        family_overview:
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/FamilyMember'
+              - type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+        vitals_quick_view:
+          type: object
+          properties:
+            blood_pressure:
+              type: object
+              properties:
+                latest:
+                  $ref: '#/components/schemas/Vital'
+                trend:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        format: date
+                      value:
+                        type: string
+            blood_sugar:
+              type: object
+              properties:
+                latest:
+                  $ref: '#/components/schemas/Vital'
+                trend:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        format: date
+                      value:
+                        type: number
+
+security:
+  - bearerAuth: []
+
+paths:
+  # Dashboard
+  /dashboard:
+    get:
+      tags: [Dashboard]
+      summary: 대시보드 데이터 조회
+      description: |
+        사용자의 대시보드에 필요한 모든 데이터를 한 번에 조회합니다.
+        - 사용자 정보
+        - 가족 정보
+        - 오늘의 할 일
+        - 가족 구성원 개요
+        - 바이탈 퀵뷰 (혈압, 혈당)
+      operationId: getDashboard
+      responses:
+        '200':
+          description: 대시보드 데이터
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # Users
+  /users/profile:
+    get:
+      tags: [Users]
+      summary: 내 프로필 조회
+      operationId: getMyProfile
+      responses:
+        '200':
+          description: 프로필 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    patch:
+      tags: [Users]
+      summary: 내 프로필 수정
+      operationId: updateMyProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                full_name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                avatar_url:
+                  type: string
+                  format: uri
+                  nullable: true
+                preferences:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '200':
+          description: 수정된 프로필
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # Families
+  /families:
+    post:
+      tags: [Families]
+      summary: 새 가족 생성
+      operationId: createFamily
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+      responses:
+        '201':
+          description: 생성된 가족
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Family'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /families/{familyId}:
+    get:
+      tags: [Families]
+      summary: 가족 정보 조회
+      operationId: getFamily
+      parameters:
+        - name: familyId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 가족 정보
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Family'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 가족을 찾을 수 없음
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /families/{familyId}/members:
+    get:
+      tags: [Families]
+      summary: 가족 구성원 목록 조회
+      operationId: getFamilyMembers
+      parameters:
+        - name: familyId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 구성원 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FamilyMember'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags: [Families]
+      summary: 가족에 새 구성원 추가
+      description: 초대 코드로 가족에 참여
+      operationId: joinFamily
+      parameters:
+        - name: familyId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nickname
+                - relationship
+              properties:
+                nickname:
+                  type: string
+                  minLength: 1
+                  maxLength: 50
+                relationship:
+                  type: string
+                  enum: [self, parent, child, spouse, other]
+      responses:
+        '201':
+          description: 추가된 구성원
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FamilyMember'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # Medications
+  /medications:
+    get:
+      tags: [Medications]
+      summary: 약물 목록 조회
+      operationId: getMedications
+      parameters:
+        - name: family_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: member_id
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: is_active
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 약물 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Medication'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags: [Medications]
+      summary: 새 약물 추가
+      operationId: createMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - family_id
+                - member_id
+                - name
+                - dosage
+                - frequency
+                - schedule_times
+                - start_date
+              properties:
+                family_id:
+                  type: string
+                  format: uuid
+                member_id:
+                  type: string
+                  format: uuid
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                dosage:
+                  type: string
+                  minLength: 1
+                  maxLength: 50
+                frequency:
+                  type: string
+                  minLength: 1
+                  maxLength: 50
+                schedule_times:
+                  type: array
+                  items:
+                    type: string
+                    pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+                  nullable: true
+                notes:
+                  type: string
+                  nullable: true
+      responses:
+        '201':
+          description: 생성된 약물
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medication'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /medications/{medicationId}:
+    patch:
+      tags: [Medications]
+      summary: 약물 정보 수정
+      operationId: updateMedication
+      parameters:
+        - name: medicationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                dosage:
+                  type: string
+                frequency:
+                  type: string
+                schedule_times:
+                  type: array
+                  items:
+                    type: string
+                end_date:
+                  type: string
+                  format: date
+                  nullable: true
+                notes:
+                  type: string
+                  nullable: true
+                is_active:
+                  type: boolean
+      responses:
+        '200':
+          description: 수정된 약물
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medication'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 약물을 찾을 수 없음
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      tags: [Medications]
+      summary: 약물 삭제
+      operationId: deleteMedication
+      parameters:
+        - name: medicationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: 삭제 성공
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 약물을 찾을 수 없음
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /medications/{medicationId}/logs:
+    get:
+      tags: [Medications]
+      summary: 약물 복용 기록 조회
+      operationId: getMedicationLogs
+      parameters:
+        - name: medicationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: 복용 기록 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedicationLog'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /medication-logs/{logId}:
+    patch:
+      tags: [Medications]
+      summary: 복용 기록 수정 (복용/건너뛰기)
+      operationId: updateMedicationLog
+      parameters:
+        - name: logId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [taken, skipped]
+                taken_at:
+                  type: string
+                  format: date-time
+                notes:
+                  type: string
+                  nullable: true
+      responses:
+        '200':
+          description: 수정된 복용 기록
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicationLog'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # Vitals
+  /vitals:
+    get:
+      tags: [Vitals]
+      summary: 바이탈 목록 조회
+      operationId: getVitals
+      parameters:
+        - name: family_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: member_id
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [blood_pressure, blood_sugar, weight, heart_rate]
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: 바이탈 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vital'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags: [Vitals]
+      summary: 새 바이탈 측정값 추가
+      operationId: createVital
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - family_id
+                - member_id
+                - type
+                - value
+                - unit
+                - measured_at
+              properties:
+                family_id:
+                  type: string
+                  format: uuid
+                member_id:
+                  type: string
+                  format: uuid
+                type:
+                  type: string
+                  enum: [blood_pressure, blood_sugar, weight, heart_rate]
+                value:
+                  type: string
+                unit:
+                  type: string
+                measured_at:
+                  type: string
+                  format: date-time
+                notes:
+                  type: string
+                  nullable: true
+      responses:
+        '201':
+          description: 생성된 바이탈
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vital'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # Reports
+  /reports:
+    get:
+      tags: [Reports]
+      summary: 건강 리포트 목록 조회
+      operationId: getReports
+      parameters:
+        - name: family_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: member_id
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 리포트 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HealthReport'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags: [Reports]
+      summary: 새 건강 리포트 생성 (AI)
+      operationId: generateReport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - member_id
+                - period_start
+                - period_end
+              properties:
+                member_id:
+                  type: string
+                  format: uuid
+                period_start:
+                  type: string
+                  format: date
+                period_end:
+                  type: string
+                  format: date
+      responses:
+        '202':
+          description: 리포트 생성 요청 수락 (비동기 처리)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    example: processing
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{reportId}:
+    get:
+      tags: [Reports]
+      summary: 리포트 상세 조회
+      operationId: getReport
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 리포트 상세
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthReport'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 리포트를 찾을 수 없음
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # Products
+  /products:
+    get:
+      tags: [Products]
+      summary: 건강 제품 목록 조회
+      operationId: getProducts
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [supplement, device, service]
+        - name: tags
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: 제품 목록
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+
+  /products/{productId}:
+    get:
+      tags: [Products]
+      summary: 제품 상세 조회
+      operationId: getProduct
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 제품 상세
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: 제품을 찾을 수 없음
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # Tasks
+  /tasks:
+    get:
+      tags: [Tasks]
+      summary: 할 일 목록 조회
+      operationId: getTasks
+      parameters:
+        - name: family_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: member_id
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: due_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: completed
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 할 일 목록
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tasks/{taskId}:
+    patch:
+      tags: [Tasks]
+      summary: 할 일 수정 (완료 처리)
+      operationId: updateTask
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                completed:
+                  type: boolean
+                completed_at:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: 수정된 할 일
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 인증 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 할 일을 찾을 수 없음
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
