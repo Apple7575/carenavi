@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
+// Generate a random invite code
+function generateInviteCode(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Removed ambiguous characters
+  let code = '';
+  for (let i = 0; i < 8; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const supabase = createClient();
@@ -60,12 +70,16 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
+    // Generate unique invite code
+    const inviteCode = generateInviteCode();
+
     // Create family
     const { data: family, error: familyError } = await supabase
       .from('families')
       .insert({
         name: body.name,
         created_by: user.id,
+        invite_code: inviteCode,
       })
       .select()
       .single();

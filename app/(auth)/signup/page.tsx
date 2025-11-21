@@ -9,12 +9,14 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
 
-export default function LoginPage() {
+export default function SignupPage() {
+  const [fullName, setFullName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
   const [error, setError] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
-  const { signIn, signInWithOAuth } = useAuth();
+  const { signUp, signInWithOAuth } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,24 +24,38 @@ export default function LoginPage() {
     setIsLoading(true);
     setError('');
 
+    // Validate passwords match
+    if (password !== confirmPassword) {
+      setError('비밀번호가 일치하지 않습니다.');
+      setIsLoading(false);
+      return;
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+      setError('비밀번호는 최소 6자 이상이어야 합니다.');
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      await signIn(email, password);
+      await signUp(email, password, fullName);
       router.push('/dashboard');
       router.refresh();
     } catch (err: any) {
-      setError(err.message || '로그인에 실패했습니다.');
+      setError(err.message || '회원가입에 실패했습니다.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleOAuthLogin = async (provider: 'google' | 'kakao') => {
+  const handleOAuthSignup = async (provider: 'google' | 'kakao') => {
     try {
       setIsLoading(true);
       setError('');
       await signInWithOAuth(provider);
     } catch (err: any) {
-      setError(err.message || '소셜 로그인에 실패했습니다.');
+      setError(err.message || '소셜 회원가입에 실패했습니다.');
       setIsLoading(false);
     }
   };
@@ -47,9 +63,9 @@ export default function LoginPage() {
   return (
     <Card>
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl text-center">로그인</CardTitle>
+        <CardTitle className="text-2xl text-center">회원가입</CardTitle>
         <CardDescription className="text-center">
-          이메일과 비밀번호를 입력하여 로그인하세요
+          계정을 만들고 CareNavi를 시작하세요
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -60,6 +76,19 @@ export default function LoginPage() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="fullName">이름</Label>
+            <Input
+              id="fullName"
+              type="text"
+              placeholder="홍길동"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="email">이메일</Label>
             <Input
@@ -74,15 +103,7 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="password">비밀번호</Label>
-              <Link
-                href="/reset-password"
-                className="text-sm text-primary hover:underline"
-              >
-                비밀번호를 잊으셨나요?
-              </Link>
-            </div>
+            <Label htmlFor="password">비밀번호</Label>
             <Input
               id="password"
               type="password"
@@ -91,11 +112,27 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               disabled={isLoading}
+              minLength={6}
+            />
+            <p className="text-xs text-gray-500">최소 6자 이상</p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="confirmPassword">비밀번호 확인</Label>
+            <Input
+              id="confirmPassword"
+              type="password"
+              placeholder="••••••••"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              disabled={isLoading}
+              minLength={6}
             />
           </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? '로그인 중...' : '로그인'}
+            {isLoading ? '가입 중...' : '회원가입'}
           </Button>
         </form>
 
@@ -113,7 +150,7 @@ export default function LoginPage() {
             variant="outline"
             className="w-full"
             disabled={isLoading}
-            onClick={() => handleOAuthLogin('google')}
+            onClick={() => handleOAuthSignup('google')}
             type="button"
           >
             Google로 계속하기
@@ -122,7 +159,7 @@ export default function LoginPage() {
             variant="outline"
             className="w-full"
             disabled={isLoading}
-            onClick={() => handleOAuthLogin('kakao')}
+            onClick={() => handleOAuthSignup('kakao')}
             type="button"
           >
             Kakao로 계속하기
@@ -130,9 +167,9 @@ export default function LoginPage() {
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-600">
-          계정이 없으신가요?{' '}
-          <Link href="/signup" className="text-primary hover:underline font-medium">
-            회원가입
+          이미 계정이 있으신가요?{' '}
+          <Link href="/login" className="text-primary hover:underline font-medium">
+            로그인
           </Link>
         </p>
       </CardContent>
