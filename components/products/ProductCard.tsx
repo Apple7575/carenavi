@@ -11,7 +11,7 @@ interface ProductCardProps {
   onEdit: () => void;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onEdit }: ProductCardProps) {
   const { deleteProduct, isDeleting } = useProducts();
 
   const handleDelete = () => {
@@ -71,7 +71,7 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
 
         <div className="flex gap-2 pt-2">
-          <Button variant="outline" size="sm" className="flex-1">
+          <Button variant="outline" size="sm" onClick={onEdit} className="flex-1">
             <Edit className="h-3 w-3 mr-1" />
             수정
           </Button>
