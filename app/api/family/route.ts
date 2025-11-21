@@ -20,8 +20,12 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Use admin client to bypass RLS for reading data
+    const { createAdminClient } = await import('@/lib/supabase/server');
+    const adminClient = createAdminClient();
+
     // Get user's families
-    const { data: familyMembers } = await supabase
+    const { data: familyMembers } = await adminClient
       .from('family_members')
       .select('family_id')
       .eq('user_id', user.id);
@@ -33,7 +37,7 @@ export async function GET(request: NextRequest) {
     const familyIds = familyMembers.map((fm: any) => fm.family_id);
 
     // Get all family members in these families
-    const { data: members, error } = await supabase
+    const { data: members, error } = await adminClient
       .from('family_members')
       .select(`
         *,
