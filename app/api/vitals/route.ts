@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
 export async function GET(request: NextRequest) {
+  console.log('[Vitals API] GET request received');
   try {
     const supabase = createClient();
+    console.log('[Vitals API] Supabase client created');
     const { data: { user }, error: authError } = await supabase.auth.getUser();
+    console.log('[Vitals API] User auth check:', { user: user?.id, authError });
 
     if (authError || !user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
