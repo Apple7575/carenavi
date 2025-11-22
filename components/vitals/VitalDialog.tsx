@@ -76,7 +76,7 @@ export function VitalDialog({ open, onOpenChange }: VitalDialogProps) {
               <SelectTrigger id="type">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-[100]">
                 <SelectItem value="blood_pressure">혈압</SelectItem>
                 <SelectItem value="blood_sugar">혈당</SelectItem>
                 <SelectItem value="weight">체중</SelectItem>

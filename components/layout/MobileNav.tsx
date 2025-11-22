@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils/cn';
-import { Home, Users, Pill, Activity, CheckSquare } from 'lucide-react';
+import { Home, Users, Pill, Activity, Package } from 'lucide-react';
 
 const navigation = [
   {
@@ -28,9 +28,9 @@ const navigation = [
     icon: Activity,
   },
   {
-    name: '할일',
-    href: '/tasks',
-    icon: CheckSquare,
+    name: '스토어',
+    href: '/store',
+    icon: Package,
   },
 ];
 

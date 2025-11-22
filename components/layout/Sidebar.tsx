@@ -35,13 +35,8 @@ const navigation = [
     icon: Activity,
   },
   {
-    name: '할 일',
-    href: '/tasks',
-    icon: CheckSquare,
-  },
-  {
-    name: '제품 관리',
-    href: '/products',
+    name: 'AI 스토어',
+    href: '/store',
     icon: Package,
   },
 ];
