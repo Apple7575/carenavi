@@ -10,6 +10,9 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { createAdminClient } = await import('@/lib/supabase/server');
+    const adminClient = createAdminClient();
+
     const { searchParams } = new URL(request.url);
     const familyMemberId = searchParams.get('family_member_id');
     const type = searchParams.get('type');
@@ -18,7 +21,7 @@ export async function GET(request: NextRequest) {
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);
 
-    let query = supabase
+    let query = adminClient
       .from('vitals')
       .select(`
         *,
@@ -61,9 +64,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { createAdminClient } = await import('@/lib/supabase/server');
+    const adminClient = createAdminClient();
+
     const body = await request.json();
 
-    const { data, error } = await supabase
+    const { data, error } = await adminClient
       .from('vitals')
       .insert({
         family_member_id: body.family_member_id,
