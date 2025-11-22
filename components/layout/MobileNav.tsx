@@ -38,7 +38,7 @@ export function MobileNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-background border-t border-border">
+    <nav className="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-gray-200 shadow-lg">
       <div className="grid grid-cols-5 h-16">
         {navigation.map((item) => {
           const isActive = pathname.startsWith(item.href);
