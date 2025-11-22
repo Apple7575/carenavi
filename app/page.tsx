@@ -23,13 +23,13 @@ export default function Home() {
             </nav>
             <div className="flex gap-2">
               <Link href="/login">
-                <Button variant="outline" className="rounded-full">
+                <Button variant="outline" className="rounded-full border-gray-100">
                   로그인
                 </Button>
               </Link>
               <Link href="/signup">
                 <Button className="rounded-full">
-                  무료 시작하기
+                  회원가입
                 </Button>
               </Link>
             </div>
