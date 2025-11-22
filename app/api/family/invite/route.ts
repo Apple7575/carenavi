@@ -10,11 +10,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { createAdminClient } = await import('@/lib/supabase/server');
+    const adminClient = createAdminClient();
+
     const body = await request.json();
     const { invite_code, relationship } = body;
 
-    // Find family by invite code
-    const { data: family, error: familyError } = await supabase
+    // Find family by invite code using admin client
+    const { data: family, error: familyError } = await adminClient
       .from('families')
       .select('*')
       .eq('invite_code', invite_code)
@@ -25,7 +28,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user is already a member
-    const { data: existingMember } = await supabase
+    const { data: existingMember } = await adminClient
       .from('family_members')
       .select('id')
       .eq('family_id', (family as any).id)
@@ -36,8 +39,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Already a member' }, { status: 400 });
     }
 
-    // Add user as family member
-    const { data: member, error: memberError } = await supabase
+    // Add user as family member using admin client
+    const { data: member, error: memberError } = await adminClient
       .from('family_members')
       .insert({
         family_id: (family as any).id,
