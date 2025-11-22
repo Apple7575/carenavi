@@ -18,6 +18,9 @@ interface MedicationDialogProps {
 export function MedicationDialog({ open, onOpenChange, medication }: MedicationDialogProps) {
   const { createMedication, updateMedication, isCreating, isUpdating } = useMedications();
   const { familyMembers, isLoading: isFamilyLoading } = useFamily();
+
+  console.log('MedicationDialog - familyMembers:', familyMembers);
+
   const [formData, setFormData] = React.useState({
     name: '',
     dosage: '',
@@ -60,6 +63,8 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    console.log('Form submitted with data:', formData);
 
     if (medication) {
       updateMedication({ id: medication.id, ...formData });
