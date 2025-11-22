@@ -56,7 +56,7 @@ export function VitalsList({ vitals }: VitalsListProps) {
                   )}
                 </div>
                 <p className="text-xs text-gray-500">
-                  {vital.family_member.user.full_name} • {formatDateTime(vital.measured_at)}
+                  {vital.family_member?.nickname || '사용자'} • {formatDateTime(vital.measured_at)}
                 </p>
                 {vital.notes && (
                   <p className="text-sm text-gray-600 mt-1">{vital.notes}</p>
