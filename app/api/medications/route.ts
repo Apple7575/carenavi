@@ -13,36 +13,12 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { createAdminClient } = await import('@/lib/supabase/server');
-    const adminClient = createAdminClient();
-
-    // Get the current user's member_id (only show current user's medications)
-    const { data: memberData, error: memberError } = await adminClient
-      .from('family_members')
-      .select('id')
-      .eq('user_id', user.id)
-      .single();
-
-    if (memberError || !memberData) {
-      return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
-    }
-
-    const query = adminClient
+    // Query medications directly by user_id (no need for family_members)
+    const { data, error } = await supabase
       .from('medications')
-      .select(`
-        *,
-        family_member:family_members!member_id (
-          id,
-          relationship,
-          user:users (
-            full_name
-          )
-        )
-      `)
-      .eq('member_id', (memberData as any).id)
+      .select('*')
+      .eq('user_id', user.id)
       .order('created_at', { ascending: false });
-
-    const { data, error } = await query;
 
     if (error) throw error;
 
@@ -62,27 +38,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { createAdminClient } = await import('@/lib/supabase/server');
-    const adminClient = createAdminClient();
-
     const body = await request.json();
 
-    // Get family_id from member_id
-    const { data: memberData, error: memberError } = await adminClient
-      .from('family_members')
-      .select('family_id')
-      .eq('id', body.member_id)
-      .single();
-
-    if (memberError || !memberData) {
-      return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
-    }
-
-    const { data, error } = await adminClient
+    const { data, error } = await supabase
       .from('medications')
       .insert({
-        family_id: (memberData as any).family_id,
-        member_id: body.member_id,
+        user_id: user.id,
         name: body.name,
         dosage: body.dosage,
         frequency: body.frequency,

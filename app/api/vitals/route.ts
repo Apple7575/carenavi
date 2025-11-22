@@ -13,20 +13,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { createAdminClient } = await import('@/lib/supabase/server');
-    const adminClient = createAdminClient();
-
-    // Get the current user's member_id (not family_id - we only want current user's vitals)
-    const { data: memberData, error: memberError } = await adminClient
-      .from('family_members')
-      .select('id')
-      .eq('user_id', user.id)
-      .single();
-
-    if (memberError || !memberData) {
-      return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
-    }
-
     const { searchParams } = new URL(request.url);
     const type = searchParams.get('type');
     const days = parseInt(searchParams.get('days') || '30');
@@ -34,17 +20,11 @@ export async function GET(request: NextRequest) {
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);
 
-    let query = adminClient
+    // Query vitals directly by user_id (no need for family_members)
+    let query = supabase
       .from('vitals')
-      .select(`
-        *,
-        family_member:family_members!member_id (
-          id,
-          nickname,
-          relationship
-        )
-      `)
-      .eq('member_id', (memberData as any).id)
+      .select('*')
+      .eq('user_id', user.id)
       .gte('measured_at', startDate.toISOString())
       .order('measured_at', { ascending: false });
 
@@ -72,21 +52,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { createAdminClient } = await import('@/lib/supabase/server');
-    const adminClient = createAdminClient();
-
     const body = await request.json();
-
-    // Get family_id from the user's family membership
-    const { data: memberData, error: memberError } = await adminClient
-      .from('family_members')
-      .select('family_id, id')
-      .eq('user_id', user.id)
-      .single();
-
-    if (memberError || !memberData) {
-      return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
-    }
 
     // Determine unit based on type
     let unit = '';
@@ -107,11 +73,10 @@ export async function POST(request: NextRequest) {
         unit = '';
     }
 
-    const { data, error } = await adminClient
+    const { data, error } = await supabase
       .from('vitals')
       .insert({
-        family_id: (memberData as any).family_id,
-        member_id: body.family_member_id || (memberData as any).id,
+        user_id: user.id,
         type: body.type,
         value: body.value,
         unit: unit,
