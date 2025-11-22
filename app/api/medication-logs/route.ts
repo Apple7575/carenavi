@@ -13,6 +13,45 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const date = searchParams.get('date') || new Date().toISOString().split('T')[0];
 
+    // Get user's active medications
+    const { data: medications } = await supabase
+      .from('medications')
+      .select('id, schedule_times')
+      .eq('user_id', user.id)
+      .eq('is_active', true);
+
+    // Create logs for today if they don't exist
+    if (medications && medications.length > 0) {
+      for (const med of medications) {
+        if (med.schedule_times && med.schedule_times.length > 0) {
+          for (const time of med.schedule_times) {
+            // Check if log already exists
+            const { data: existingLog } = await supabase
+              .from('medication_logs')
+              .select('id')
+              .eq('user_id', user.id)
+              .eq('medication_id', med.id)
+              .eq('scheduled_date', date)
+              .eq('scheduled_time', `${time}:00`)
+              .single();
+
+            // Create log if it doesn't exist
+            if (!existingLog) {
+              await supabase
+                .from('medication_logs')
+                .insert({
+                  user_id: user.id,
+                  medication_id: med.id,
+                  scheduled_date: date,
+                  scheduled_time: `${time}:00`,
+                  status: 'pending',
+                });
+            }
+          }
+        }
+      }
+    }
+
     // Get today's medication logs
     const { data: logs, error } = await supabase
       .from('medication_logs')

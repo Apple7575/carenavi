@@ -1,5 +1,5 @@
 -- Create medication_logs table for tracking daily medication intake
-CREATE TABLE IF NOT EXISTS medication_logs (
+CREATE TABLE medication_logs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   medication_id UUID NOT NULL REFERENCES medications(id) ON DELETE CASCADE,
@@ -27,20 +27,20 @@ ALTER TABLE medication_logs ENABLE ROW LEVEL SECURITY;
 -- RLS Policies
 CREATE POLICY "Users can view their own medication logs"
   ON medication_logs FOR SELECT
-  USING ((SELECT auth.uid()) = user_id);
+  USING (auth.uid() = user_id);
 
 CREATE POLICY "Users can insert their own medication logs"
   ON medication_logs FOR INSERT
-  WITH CHECK ((SELECT auth.uid()) = user_id);
+  WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can update their own medication logs"
   ON medication_logs FOR UPDATE
-  USING ((SELECT auth.uid()) = user_id)
-  WITH CHECK ((SELECT auth.uid()) = user_id);
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "Users can delete their own medication logs"
   ON medication_logs FOR DELETE
-  USING ((SELECT auth.uid()) = user_id);
+  USING (auth.uid() = user_id);
 
 -- Create updated_at trigger
 CREATE OR REPLACE FUNCTION update_medication_logs_updated_at()
