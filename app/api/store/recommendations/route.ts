@@ -123,7 +123,10 @@ export async function GET(request: NextRequest) {
       max_tokens: 1000,
     });
 
-    const aiResponse = completion.choices[0]?.message?.content || '[]';
+    let aiResponse = completion.choices[0]?.message?.content || '[]';
+
+    // Remove markdown code blocks if present
+    aiResponse = aiResponse.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
 
     // Parse AI response
     let recommendations;
