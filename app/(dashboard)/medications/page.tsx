@@ -9,6 +9,7 @@ import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
 import { EmptyState } from '@/components/shared/EmptyState';
 import { MedicationCard } from '@/components/medications/MedicationCard';
 import { MedicationDialog } from '@/components/medications/MedicationDialog';
+import { TodaySchedule } from '@/components/medications/TodaySchedule';
 
 export default function MedicationsPage() {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
@@ -61,30 +62,36 @@ export default function MedicationsPage() {
         </Button>
       </div>
 
+      {/* Today's Schedule */}
+      <TodaySchedule />
+
       {/* Medications List */}
-      {!medications || medications.length === 0 ? (
-        <Card>
-          <CardContent className="p-12">
-            <EmptyState
-              icon={PillIcon}
-              title="등록된 복약이 없습니다"
-              description="복약을 추가하여 일정을 관리하세요"
-              actionLabel="복약 추가하기"
-              onAction={() => setIsDialogOpen(true)}
-            />
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {medications.map((medication: any) => (
-            <MedicationCard
-              key={medication.id}
-              medication={medication}
-              onEdit={() => handleEdit(medication)}
-            />
-          ))}
-        </div>
-      )}
+      <div>
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">등록된 복약</h2>
+        {!medications || medications.length === 0 ? (
+          <Card>
+            <CardContent className="p-12">
+              <EmptyState
+                icon={PillIcon}
+                title="등록된 복약이 없습니다"
+                description="복약을 추가하여 일정을 관리하세요"
+                actionLabel="복약 추가하기"
+                onAction={() => setIsDialogOpen(true)}
+              />
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {medications.map((medication: any) => (
+              <MedicationCard
+                key={medication.id}
+                medication={medication}
+                onEdit={() => handleEdit(medication)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Add/Edit Dialog */}
       <MedicationDialog
