@@ -34,14 +34,6 @@ export function MedicationCard({ medication, onEdit }: MedicationCardProps) {
       </CardHeader>
       <CardContent className="space-y-3">
         <div>
-          <p className="text-sm font-medium text-gray-700">복용 대상</p>
-          <p className="text-sm text-gray-600">
-            {medication.family_member.user.full_name} (
-            {medication.family_member.relationship})
-          </p>
-        </div>
-
-        <div>
           <p className="text-sm font-medium text-gray-700">복용 빈도</p>
           <p className="text-sm text-gray-600">{medication.frequency}</p>
         </div>
