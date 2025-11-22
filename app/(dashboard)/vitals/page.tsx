@@ -12,10 +12,65 @@ import { VitalsList } from '@/components/vitals/VitalsList';
 import { VitalsChart } from '@/components/vitals/VitalsChart';
 import { VitalDialog } from '@/components/vitals/VitalDialog';
 
+const sampleVitals = [
+  {
+    id: 'sample-1',
+    type: 'blood_pressure',
+    value: '120/80',
+    unit: 'mmHg',
+    measured_at: new Date().toISOString(),
+    notes: '정상 범위입니다',
+    family_member: {
+      nickname: '샘플 사용자',
+    },
+  },
+  {
+    id: 'sample-2',
+    type: 'blood_sugar',
+    value: '95',
+    unit: 'mg/dL',
+    measured_at: new Date(Date.now() - 86400000).toISOString(),
+    notes: '공복 혈당',
+    family_member: {
+      nickname: '샘플 사용자',
+    },
+  },
+  {
+    id: 'sample-3',
+    type: 'weight',
+    value: '70.5',
+    unit: 'kg',
+    measured_at: new Date(Date.now() - 172800000).toISOString(),
+    notes: '',
+    family_member: {
+      nickname: '샘플 사용자',
+    },
+  },
+  {
+    id: 'sample-4',
+    type: 'heart_rate',
+    value: '72',
+    unit: 'bpm',
+    measured_at: new Date(Date.now() - 259200000).toISOString(),
+    notes: '안정시 심박수',
+    family_member: {
+      nickname: '샘플 사용자',
+    },
+  },
+];
+
 export default function VitalsPage() {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [selectedType, setSelectedType] = React.useState<string>('all');
   const { data: vitals, isLoading, error } = useVitals(undefined, selectedType === 'all' ? undefined : selectedType);
+
+  // Use sample data if no vitals exist
+  let displayVitals = (!vitals || vitals.length === 0) ? sampleVitals : vitals;
+
+  // Filter sample data by type if needed
+  if ((!vitals || vitals.length === 0) && selectedType !== 'all') {
+    displayVitals = sampleVitals.filter(v => v.type === selectedType);
+  }
 
   if (isLoading) {
     return (
@@ -62,25 +117,11 @@ export default function VitalsPage() {
         </TabsList>
 
         <TabsContent value={selectedType} className="space-y-6">
-          {!vitals || vitals.length === 0 ? (
-            <Card className="p-12">
-              <EmptyState
-                icon={Activity}
-                title="기록된 건강 지표가 없습니다"
-                description="건강 지표를 추가하여 건강 상태를 추적하세요"
-                actionLabel="지표 추가하기"
-                onAction={() => setIsDialogOpen(true)}
-              />
-            </Card>
-          ) : (
-            <>
-              {/* Chart */}
-              <VitalsChart vitals={vitals} />
+          {/* Chart */}
+          <VitalsChart vitals={displayVitals} />
 
-              {/* List */}
-              <VitalsList vitals={vitals} />
-            </>
-          )}
+          {/* List */}
+          <VitalsList vitals={displayVitals} />
         </TabsContent>
       </Tabs>
 
