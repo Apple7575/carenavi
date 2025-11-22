@@ -202,7 +202,7 @@ module.exports = {
 
       /**
        * ========================================================================
-       * Shadows
+       * Shadows - Glassmorphism & Clean Design
        * ========================================================================
        */
       boxShadow: {
@@ -211,6 +211,8 @@ module.exports = {
         md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
         lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
         xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+        // Glassmorphism micro shadow
+        glass: '0 2px 8px 0 rgba(31, 38, 135, 0.07)',
       },
 
       /**
