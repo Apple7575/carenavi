@@ -313,7 +313,7 @@ export default function VitalsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">건강 지표</h1>
-          <p className="text-gray-500 mt-1">가족 구성원의 건강 지표를 기록하고 추적하세요</p>
+          <p className="text-gray-500 mt-1">나의 건강 지표를 기록하고 추적하세요</p>
         </div>
         <Button onClick={() => setIsDialogOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />

@@ -9,49 +9,36 @@ import { formatTime } from '@/lib/utils/date';
 import { EmptyState } from '@/components/shared/EmptyState';
 import { cn } from '@/lib/utils/cn';
 
-interface MedicationLog {
+interface Medication {
   id: string;
-  medication_id: string;
-  scheduled_at: string;
-  taken_at?: string;
-  status: 'pending' | 'taken' | 'skipped';
+  user_id: string;
+  name: string;
+  dosage: string;
+  frequency: string;
+  schedule_times: string[];
+  start_date?: string;
+  end_date?: string;
   notes?: string;
-  medication: {
-    name: string;
-    dosage: string;
-    family_member: {
-      health_score: number;
-      relationship: string;
-      user: {
-        full_name: string;
-      };
-    };
-  };
+  is_active: boolean;
+  created_at: string;
 }
 
 interface TodaysMedicationsProps {
-  medications: MedicationLog[];
-  onToggle?: (logId: string, taken: boolean) => void;
+  medications: Medication[];
 }
 
-export function TodaysMedications({ medications, onToggle }: TodaysMedicationsProps) {
-  const handleCheckedChange = (logId: string, checked: boolean) => {
-    if (onToggle) {
-      onToggle(logId, checked);
-    }
-  };
-
+export function TodaysMedications({ medications }: TodaysMedicationsProps) {
   if (medications.length === 0) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>오늘의 복약</CardTitle>
-          <CardDescription>오늘 예정된 복약 일정</CardDescription>
+          <CardTitle>나의 복약</CardTitle>
+          <CardDescription>활성 복약 목록</CardDescription>
         </CardHeader>
         <CardContent>
           <EmptyState
             icon={Pill}
-            title="오늘 예정된 복약이 없습니다"
+            title="등록된 복약이 없습니다"
             description="복약 일정을 등록하여 관리를 시작하세요"
             actionLabel="복약 등록하기"
           />
@@ -60,78 +47,42 @@ export function TodaysMedications({ medications, onToggle }: TodaysMedicationsPr
     );
   }
 
-  const pendingCount = medications.filter(m => m.status === 'pending').length;
-  const takenCount = medications.filter(m => m.status === 'taken').length;
-
   return (
     <Card>
       <CardHeader>
-        <CardTitle>오늘의 복약</CardTitle>
+        <CardTitle>나의 복약</CardTitle>
         <CardDescription>
-          {takenCount}/{medications.length}개 완료
-          {pendingCount > 0 && (
-            <span className="ml-2 text-warning">
-              ({pendingCount}개 대기중)
-            </span>
-          )}
+          총 {medications.length}개의 활성 복약
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
-          {medications.map((log) => {
-            const isTaken = log.status === 'taken';
-            const isPending = log.status === 'pending';
-
-            return (
-              <div
-                key={log.id}
-                className={cn(
-                  'flex items-start gap-3 p-3 rounded-lg shadow-sm hover:shadow-md transition-all',
-                  isTaken && 'bg-gray-50',
-                  isPending && 'bg-primary-50'
-                )}
-              >
-                <Checkbox
-                  id={log.id}
-                  checked={isTaken}
-                  onCheckedChange={(checked) =>
-                    handleCheckedChange(log.id, checked as boolean)
-                  }
-                  className="mt-1"
-                />
-                <div className="flex-1 space-y-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <label
-                        htmlFor={log.id}
-                        className={cn(
-                          'text-sm font-medium cursor-pointer',
-                          isTaken && 'line-through text-gray-500'
-                        )}
-                      >
-                        {log.medication.name}
-                      </label>
-                      <p className="text-xs text-gray-500">
-                        {log.medication.dosage}
-                      </p>
-                    </div>
-                    <span className="text-xs text-gray-500 whitespace-nowrap">
-                      {formatTime(log.scheduled_at)}
-                    </span>
+          {medications.map((medication) => (
+            <div
+              key={medication.id}
+              className="flex items-start gap-3 p-3 rounded-lg bg-white shadow-sm hover:shadow-md transition-all"
+            >
+              <div className="flex-1 space-y-1">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <p className="text-sm font-medium">{medication.name}</p>
+                    <p className="text-xs text-gray-500">{medication.dosage}</p>
                   </div>
-                  <p className="text-xs text-gray-600">
-                    {log.medication.family_member.user.full_name} (
-                    {log.medication.family_member.relationship})
-                  </p>
-                  {log.taken_at && (
-                    <p className="text-xs text-success">
-                      ✓ {formatTime(log.taken_at)} 복용 완료
-                    </p>
-                  )}
+                  <span className="text-xs text-primary font-medium whitespace-nowrap">
+                    {medication.frequency}
+                  </span>
                 </div>
+                {medication.schedule_times && medication.schedule_times.length > 0 && (
+                  <p className="text-xs text-gray-600">
+                    복용 시간: {medication.schedule_times.join(', ')}
+                  </p>
+                )}
+                {medication.notes && (
+                  <p className="text-xs text-gray-500">{medication.notes}</p>
+                )}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </CardContent>
     </Card>
