@@ -11,6 +11,121 @@ import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
 import { AlertCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
+// Sample data for when user has no data
+const sampleMedications = [
+  {
+    id: 'sample-med-1',
+    medication_id: 'sample-1',
+    scheduled_at: new Date().toISOString(),
+    status: 'pending' as const,
+    medication: {
+      name: '아스피린',
+      dosage: '100mg',
+      family_member: {
+        health_score: 85,
+        relationship: '본인',
+        user: {
+          full_name: '샘플 사용자',
+        },
+      },
+    },
+  },
+  {
+    id: 'sample-med-2',
+    medication_id: 'sample-2',
+    scheduled_at: new Date(Date.now() + 3600000).toISOString(),
+    status: 'pending' as const,
+    medication: {
+      name: '혈압약',
+      dosage: '5mg',
+      family_member: {
+        health_score: 85,
+        relationship: '본인',
+        user: {
+          full_name: '샘플 사용자',
+        },
+      },
+    },
+  },
+  {
+    id: 'sample-med-3',
+    medication_id: 'sample-3',
+    scheduled_at: new Date(Date.now() - 3600000).toISOString(),
+    taken_at: new Date(Date.now() - 3500000).toISOString(),
+    status: 'taken' as const,
+    medication: {
+      name: '비타민 D',
+      dosage: '1000IU',
+      family_member: {
+        health_score: 85,
+        relationship: '본인',
+        user: {
+          full_name: '샘플 사용자',
+        },
+      },
+    },
+  },
+];
+
+const sampleVitals = [
+  {
+    id: 'sample-v-1',
+    family_member_id: 'sample',
+    type: 'blood_pressure' as const,
+    value: '120/80',
+    measured_at: new Date().toISOString(),
+    family_member: { user: { full_name: '샘플 사용자' } },
+  },
+  {
+    id: 'sample-v-2',
+    family_member_id: 'sample',
+    type: 'blood_pressure' as const,
+    value: '118/78',
+    measured_at: new Date(Date.now() - 86400000).toISOString(),
+    family_member: { user: { full_name: '샘플 사용자' } },
+  },
+  {
+    id: 'sample-v-3',
+    family_member_id: 'sample',
+    type: 'blood_pressure' as const,
+    value: '122/82',
+    measured_at: new Date(Date.now() - 172800000).toISOString(),
+    family_member: { user: { full_name: '샘플 사용자' } },
+  },
+  {
+    id: 'sample-v-4',
+    family_member_id: 'sample',
+    type: 'blood_sugar' as const,
+    value: '95',
+    measured_at: new Date().toISOString(),
+    family_member: { user: { full_name: '샘플 사용자' } },
+  },
+  {
+    id: 'sample-v-5',
+    family_member_id: 'sample',
+    type: 'blood_sugar' as const,
+    value: '92',
+    measured_at: new Date(Date.now() - 86400000).toISOString(),
+    family_member: { user: { full_name: '샘플 사용자' } },
+  },
+  {
+    id: 'sample-v-6',
+    family_member_id: 'sample',
+    type: 'heart_rate' as const,
+    value: '72',
+    measured_at: new Date().toISOString(),
+    family_member: { user: { full_name: '샘플 사용자' } },
+  },
+  {
+    id: 'sample-v-7',
+    family_member_id: 'sample',
+    type: 'heart_rate' as const,
+    value: '70',
+    measured_at: new Date(Date.now() - 86400000).toISOString(),
+    family_member: { user: { full_name: '샘플 사용자' } },
+  },
+];
+
 export default function DashboardPage() {
   const { data, isLoading, error } = useDashboard();
 
@@ -42,6 +157,15 @@ export default function DashboardPage() {
     return null;
   }
 
+  // Use sample data if user has no data
+  const displayMedications = (!data.todaysMedications || data.todaysMedications.length === 0)
+    ? sampleMedications
+    : data.todaysMedications;
+
+  const displayVitals = (!data.recentVitals || data.recentVitals.length === 0)
+    ? sampleVitals
+    : data.recentVitals;
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -57,14 +181,14 @@ export default function DashboardPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Left Column */}
         <div className="space-y-6">
-          <TodaysMedications medications={data.todaysMedications} />
+          <TodaysMedications medications={displayMedications} />
           <QuickActions />
         </div>
 
         {/* Right Column */}
         <div className="space-y-6">
           <FamilyOverview members={data.familyMembers} />
-          <VitalsChart vitals={data.recentVitals} />
+          <VitalsChart vitals={displayVitals} />
         </div>
       </div>
     </div>
