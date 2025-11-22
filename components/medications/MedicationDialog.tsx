@@ -99,7 +99,7 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
                 <SelectTrigger id="family_member">
                   <SelectValue placeholder="가족 구성원 선택" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="z-[100]">
                   {familyMembers?.map((member: any) => (
                     <SelectItem key={member.id} value={member.id}>
                       {member.nickname}
@@ -139,7 +139,7 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
                 <SelectTrigger id="frequency">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="z-[100]">
                   <SelectItem value="daily">매일</SelectItem>
                   <SelectItem value="twice_daily">하루 2회</SelectItem>
                   <SelectItem value="three_times_daily">하루 3회</SelectItem>
