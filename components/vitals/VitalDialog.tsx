@@ -22,7 +22,6 @@ export function VitalDialog({ open, onOpenChange }: VitalDialogProps) {
     diastolic: '',
     measured_at: new Date().toISOString().slice(0, 16),
     notes: '',
-    family_member_id: '',
   });
 
   React.useEffect(() => {
@@ -34,7 +33,6 @@ export function VitalDialog({ open, onOpenChange }: VitalDialogProps) {
         diastolic: '',
         measured_at: new Date().toISOString().slice(0, 16),
         notes: '',
-        family_member_id: '',
       });
     }
   }, [open]);
@@ -52,7 +50,6 @@ export function VitalDialog({ open, onOpenChange }: VitalDialogProps) {
       value,
       measured_at: formData.measured_at,
       notes: formData.notes,
-      family_member_id: formData.family_member_id || undefined,
     });
 
     onOpenChange(false);
