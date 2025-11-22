@@ -25,19 +25,17 @@ export async function GET(request: NextRequest) {
       .from('vitals')
       .select(`
         *,
-        family_member:family_members (
+        family_member:family_members!member_id (
           id,
-          relationship,
-          user:users (
-            full_name
-          )
+          nickname,
+          relationship
         )
       `)
       .gte('measured_at', startDate.toISOString())
       .order('measured_at', { ascending: false });
 
     if (familyMemberId) {
-      query = query.eq('family_member_id', familyMemberId);
+      query = query.eq('member_id', familyMemberId);
     }
 
     if (type) {
@@ -84,7 +82,7 @@ export async function POST(request: NextRequest) {
       .from('vitals')
       .insert({
         family_id: (memberData as any).family_id,
-        family_member_id: body.family_member_id || (memberData as any).id,
+        member_id: body.family_member_id || (memberData as any).id,
         type: body.type,
         value: body.value,
         measured_at: body.measured_at || new Date().toISOString(),
