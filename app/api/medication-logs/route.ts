@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       .from('medications')
       .select('id, schedule_times')
       .eq('user_id', user.id)
-      .eq('is_active', true);
+      .eq('is_active', true) as { data: Array<{ id: string; schedule_times: string[] }> | null };
 
     // Create logs for today if they don't exist
     if (medications && medications.length > 0) {
