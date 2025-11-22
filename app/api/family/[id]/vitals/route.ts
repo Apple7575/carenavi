@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { memberId: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     const supabase = createClient();
@@ -30,7 +30,7 @@ export async function GET(
     const { data: targetMember, error: targetMemberError } = await adminClient
       .from('family_members')
       .select('family_id')
-      .eq('id', params.memberId)
+      .eq('id', params.id)
       .single();
 
     if (targetMemberError || !targetMember) {
@@ -46,7 +46,7 @@ export async function GET(
     const { data: vitals, error: vitalsError } = await adminClient
       .from('vitals')
       .select('*')
-      .eq('member_id', params.memberId)
+      .eq('member_id', params.id)
       .order('measured_at', { ascending: false })
       .limit(30);
 
