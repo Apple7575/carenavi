@@ -74,7 +74,7 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader className="space-y-3 pb-4 border-b">
-          <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <DialogTitle className="text-2xl font-bold text-blue-600">
             {medication ? '복약 수정' : '복약 추가'}
           </DialogTitle>
           <DialogDescription className="text-base text-gray-600">
@@ -200,7 +200,7 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
             <Button
               type="submit"
               disabled={isCreating || isUpdating}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-md hover:shadow-lg transition-all"
             >
               {medication ? '수정' : '추가'}
             </Button>
