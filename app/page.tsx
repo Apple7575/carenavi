@@ -60,8 +60,12 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="w-full h-80 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
-                <div className="text-6xl">💊</div>
+              <div className="w-full h-80 rounded-xl overflow-hidden shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80"
+                  alt="건강 관리 앱 대시보드"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
@@ -133,8 +137,12 @@ export default function Home() {
         <section id="how-it-works" className="py-20 sm:py-28">
           <div className="mx-auto max-w-6xl px-4">
             <div className="grid items-center gap-12 lg:grid-cols-2">
-              <div className="w-full h-96 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
-                <div className="text-8xl">📱</div>
+              <div className="w-full h-96 rounded-xl overflow-hidden shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80"
+                  alt="스마트폰에서 건강 데이터 확인"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-2">
