@@ -78,7 +78,7 @@ export function FamilyOverview({ members }: FamilyOverviewProps) {
 
   return (
     <Card className="shadow-sm hover:shadow-md transition-shadow">
-      <CardHeader className="bg-blue-50 border-b">
+      <CardHeader className="bg-blue-50 shadow-sm">
         <CardTitle className="text-lg">가족 구성원</CardTitle>
         <CardDescription className="text-gray-600">
           총 {members.length}명의 건강 상태
@@ -89,7 +89,7 @@ export function FamilyOverview({ members }: FamilyOverviewProps) {
           {members.map((member) => (
             <div
               key={member.id}
-              className="flex items-center justify-between p-4 rounded-xl border border-gray-200 bg-white hover:bg-blue-50/50 hover:border-blue-200 transition-all duration-200 shadow-sm"
+              className="flex items-center justify-between p-4 rounded-xl bg-white hover:bg-blue-50/50 transition-all duration-200 shadow-md hover:shadow-lg"
             >
               <div className="flex items-center gap-4">
                 <Avatar className="h-12 w-12 border-2 border-white shadow-md">

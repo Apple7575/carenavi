@@ -86,9 +86,9 @@ export function TodaysMedications({ medications, onToggle }: TodaysMedicationsPr
               <div
                 key={log.id}
                 className={cn(
-                  'flex items-start gap-3 p-3 rounded-lg border transition-colors',
-                  isTaken && 'bg-gray-50 border-gray-200',
-                  isPending && 'border-primary bg-primary-50'
+                  'flex items-start gap-3 p-3 rounded-lg shadow-sm hover:shadow-md transition-all',
+                  isTaken && 'bg-gray-50',
+                  isPending && 'bg-primary-50'
                 )}
               >
                 <Checkbox

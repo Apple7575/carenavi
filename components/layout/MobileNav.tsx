@@ -13,11 +13,6 @@ const navigation = [
     icon: Home,
   },
   {
-    name: '가족',
-    href: '/family',
-    icon: Users,
-  },
-  {
     name: '복약',
     href: '/medications',
     icon: Pill,
@@ -26,6 +21,11 @@ const navigation = [
     name: '건강',
     href: '/vitals',
     icon: Activity,
+  },
+  {
+    name: '가족',
+    href: '/family',
+    icon: Users,
   },
   {
     name: '스토어',
@@ -38,7 +38,7 @@ export function MobileNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-gray-200 shadow-lg">
+    <nav className="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white shadow-lg">
       <div className="grid grid-cols-5 h-16">
         {navigation.map((item) => {
           const isActive = pathname.startsWith(item.href);

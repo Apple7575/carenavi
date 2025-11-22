@@ -36,7 +36,7 @@ export function VitalsList({ vitals }: VitalsListProps) {
           {vitals.map((vital: any) => (
             <div
               key={vital.id}
-              className="flex items-center justify-between p-3 rounded-lg border border-border hover:bg-gray-50 transition-colors"
+              className="flex items-center justify-between p-3 rounded-lg shadow-sm hover:shadow-md hover:bg-gray-50 transition-all"
             >
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">

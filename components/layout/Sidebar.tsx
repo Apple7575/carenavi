@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils/cn';
-import { Home, Users, Pill, Activity, CheckSquare, Package, Settings, LogOut } from 'lucide-react';
+import { Home, Users, Pill, Activity, Package, Settings, LogOut } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
@@ -20,11 +20,6 @@ const navigation = [
     icon: Home,
   },
   {
-    name: '가족 관리',
-    href: '/family',
-    icon: Users,
-  },
-  {
     name: '복약 관리',
     href: '/medications',
     icon: Pill,
@@ -35,7 +30,12 @@ const navigation = [
     icon: Activity,
   },
   {
-    name: 'AI 스토어',
+    name: '가족 관리',
+    href: '/family',
+    icon: Users,
+  },
+  {
+    name: 'AI스토어',
     href: '/store',
     icon: Package,
   },
@@ -61,12 +61,12 @@ export function Sidebar({ className }: SidebarProps) {
     <aside
       className={cn(
         'hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col',
-        'w-64 bg-white border-r border-gray-200 shadow-sm',
+        'w-64 bg-white shadow-md',
         className
       )}
     >
       {/* Logo */}
-      <div className="flex h-16 shrink-0 items-center px-6 border-b border-gray-200">
+      <div className="flex h-16 shrink-0 items-center px-6 shadow-sm">
         <Link href="/dashboard" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
             <span className="text-white font-bold text-lg">C</span>
@@ -122,7 +122,7 @@ export function Sidebar({ className }: SidebarProps) {
           </Link>
 
           {/* User Profile */}
-          <div className="mt-4 pt-4 border-t border-gray-200">
+          <div className="mt-4 pt-4 shadow-sm">
             <div className="flex items-center gap-x-3 px-3 py-2">
               <Avatar>
                 <AvatarImage src="" alt="User" />

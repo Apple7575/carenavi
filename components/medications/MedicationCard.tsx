@@ -68,16 +68,15 @@ export function MedicationCard({ medication, onEdit }: MedicationCardProps) {
         )}
 
         <div className="flex gap-2 pt-2">
-          <Button variant="outline" size="sm" onClick={onEdit} className="flex-1">
+          <Button size="sm" onClick={onEdit} className="flex-1 shadow-sm hover:shadow-md bg-white text-gray-700 hover:bg-gray-50">
             <Edit className="h-3 w-3 mr-1" />
             수정
           </Button>
           <Button
-            variant="outline"
             size="sm"
             onClick={handleDelete}
             disabled={isDeleting}
-            className="text-error hover:text-error"
+            className="shadow-sm hover:shadow-md bg-white text-error hover:bg-red-50"
           >
             <Trash2 className="h-3 w-3" />
           </Button>

@@ -52,9 +52,8 @@ export function QuickActions() {
             const Icon = action.icon;
             return (
               <Link key={action.title} href={action.href}>
-                <Button
-                  variant="outline"
-                  className="w-full h-auto p-4 flex items-start gap-3 hover:bg-gray-50"
+                <div
+                  className="w-full h-auto p-4 flex items-start gap-3 bg-white rounded-lg shadow-md hover:shadow-lg hover:bg-gray-50 transition-all cursor-pointer"
                 >
                   <div className={`p-2 rounded-lg ${action.bgColor}`}>
                     <Icon className={`h-5 w-5 ${action.color}`} />
@@ -65,7 +64,7 @@ export function QuickActions() {
                       {action.description}
                     </p>
                   </div>
-                </Button>
+                </div>
               </Link>
             );
           })}

@@ -18,7 +18,7 @@ export function InviteCodeCard({ inviteCode }: InviteCodeCardProps) {
   };
 
   return (
-    <div className="relative overflow-hidden flex items-center justify-between p-6 rounded-xl bg-blue-50 border-2 border-blue-200 shadow-lg">
+    <div className="relative overflow-hidden flex items-center justify-between p-6 rounded-xl bg-blue-50 shadow-lg hover:shadow-xl transition-shadow">
       <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl"></div>
       <div className="relative z-10">
         <p className="text-sm font-medium text-gray-600 mb-2 flex items-center gap-2">
@@ -34,13 +34,12 @@ export function InviteCodeCard({ inviteCode }: InviteCodeCardProps) {
         </p>
       </div>
       <Button
-        variant="outline"
         size="lg"
         onClick={handleCopy}
-        className={`ml-4 relative z-10 transition-all duration-200 ${
+        className={`ml-4 relative z-10 transition-all duration-200 shadow-md hover:shadow-lg ${
           copied
-            ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700'
-            : 'bg-white hover:bg-blue-50 border-blue-300 hover:border-blue-400'
+            ? 'bg-blue-600 text-white hover:bg-blue-700'
+            : 'bg-white text-blue-600 hover:bg-blue-50'
         }`}
       >
         {copied ? (
