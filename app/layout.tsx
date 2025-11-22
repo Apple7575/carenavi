@@ -6,7 +6,7 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
-  title: 'CareNavi - 가족 건강 관리 플랫폼',
+  title: 'CareNavi - 개인 맞춤형 만성질환 코칭 플랫폼',
   description: '부모님과 가족의 건강을 체계적으로 관리하는 웹 플랫폼',
 };
 
