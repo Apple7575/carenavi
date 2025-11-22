@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useMedications } from '@/hooks/useMedications';
-import { useFamily } from '@/hooks/useFamily';
 
 interface MedicationDialogProps {
   open: boolean;
@@ -17,9 +16,6 @@ interface MedicationDialogProps {
 
 export function MedicationDialog({ open, onOpenChange, medication }: MedicationDialogProps) {
   const { createMedication, updateMedication, isCreating, isUpdating } = useMedications();
-  const { familyMembers, isLoading: isFamilyLoading } = useFamily();
-
-  console.log('MedicationDialog - familyMembers:', familyMembers);
 
   const [formData, setFormData] = React.useState({
     name: '',
@@ -30,7 +26,6 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
     end_date: '',
     instructions: '',
     is_active: true,
-    member_id: '',
   });
 
   React.useEffect(() => {
@@ -44,7 +39,6 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
         end_date: medication.end_date || '',
         instructions: medication.instructions || '',
         is_active: medication.is_active ?? true,
-        member_id: medication.member_id || '',
       });
     } else {
       setFormData({
@@ -56,15 +50,12 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
         end_date: '',
         instructions: '',
         is_active: true,
-        member_id: '',
       });
     }
   }, [medication, open]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log('Form submitted with data:', formData);
 
     if (medication) {
       updateMedication({ id: medication.id, ...formData });
@@ -89,26 +80,6 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
 
         <form onSubmit={handleSubmit} className="space-y-6 pt-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="family_member">가족 구성원 *</Label>
-              <Select
-                value={formData.member_id}
-                onValueChange={(value) => setFormData({ ...formData, member_id: value })}
-                required
-              >
-                <SelectTrigger id="family_member">
-                  <SelectValue placeholder="가족 구성원 선택" />
-                </SelectTrigger>
-                <SelectContent className="z-[100]">
-                  {familyMembers?.map((member: any) => (
-                    <SelectItem key={member.id} value={member.id}>
-                      {member.nickname}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
             <div className="space-y-2">
               <Label htmlFor="name">약물명 *</Label>
               <Input

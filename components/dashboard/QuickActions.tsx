@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Pill, Activity, CheckSquare, UserPlus } from 'lucide-react';
+import { Pill, Activity, UserPlus, Sparkles } from 'lucide-react';
 
 export function QuickActions() {
   const actions = [
@@ -21,6 +21,14 @@ export function QuickActions() {
       href: '/vitals',
       color: 'text-success',
       bgColor: 'bg-green-50',
+    },
+    {
+      title: 'AI 스토어',
+      description: 'AI 맞춤 건강 제품 추천',
+      icon: Sparkles,
+      href: '/store',
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-50',
     },
     {
       title: '가족 초대',
