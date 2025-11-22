@@ -2,24 +2,18 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-interface MedicationLog {
+interface Medication {
   id: string;
-  medication_id: string;
-  scheduled_at: string;
-  taken_at?: string;
-  status: 'pending' | 'taken' | 'skipped';
+  user_id: string;
+  name: string;
+  dosage: string;
+  frequency: string;
+  schedule_times: string[];
+  start_date?: string;
+  end_date?: string;
   notes?: string;
-  medication: {
-    name: string;
-    dosage: string;
-    family_member: {
-      health_score: number;
-      relationship: string;
-      user: {
-        full_name: string;
-      };
-    };
-  };
+  is_active: boolean;
+  created_at: string;
 }
 
 interface FamilyMember {
@@ -37,16 +31,12 @@ interface FamilyMember {
 
 interface Vital {
   id: string;
-  family_member_id: string;
+  user_id: string;
   type: 'blood_pressure' | 'blood_sugar' | 'weight' | 'heart_rate';
   value: string;
+  unit: string;
   measured_at: string;
   notes?: string;
-  family_member: {
-    user: {
-      full_name: string;
-    };
-  };
 }
 
 interface HealthSummary {
@@ -56,7 +46,7 @@ interface HealthSummary {
 }
 
 interface DashboardData {
-  todaysMedications: MedicationLog[];
+  todaysMedications: Medication[];
   familyMembers: FamilyMember[];
   recentVitals: Vital[];
   healthSummary: HealthSummary;
