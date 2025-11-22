@@ -94,7 +94,7 @@ export default function Home() {
                   <div className="flex flex-col gap-1">
                     <h3 className="text-gray-900 text-lg font-bold leading-tight">간편한 복약 관리</h3>
                     <p className="text-gray-500 text-base font-normal leading-normal">
-                      복잡한 복약 일정도 클릭 한번으로 등록하고, 놓치지 않도록 알림을 받아보세요.
+                      복약 관리부터 건강 데이터 기록 및 자동 분석까지,<br />만성질환 관리에 필요한 모든 것을 하나로 모았습니다.
                     </p>
                   </div>
                 </div>
@@ -107,9 +107,9 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-gray-900 text-lg font-bold leading-tight">건강 데이터 추적</h3>
+                    <h3 className="text-gray-900 text-lg font-bold leading-tight">건강 데이터 자동 기록 미 분석 시스템</h3>
                     <p className="text-gray-500 text-base font-normal leading-normal">
-                      혈압, 혈당 등 주요 건강 지표를 기록하고 추이를 한눈에 확인하세요.
+                      혈압, 혈당 등 주요 건강 지표를 기록하고 맞춤 분석 결과와 추이를 한눈에 확인하세요.
                     </p>
                   </div>
                 </div>
@@ -122,9 +122,9 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-gray-900 text-lg font-bold leading-tight">AI 맞춤 추천</h3>
+                    <h3 className="text-gray-900 text-lg font-bold leading-tight">AI + 전문가 맞춤 관리</h3>
                     <p className="text-gray-500 text-base font-normal leading-normal">
-                      건강 데이터를 분석해 나에게 필요한 건강 보조제와 생활 습관을 추천받으세요.
+                      AI 맞춤 관리와 보건 의료인 전문 관리로 나에게 필요한 건강 모니터링을 통해 무료로 건강해지세요.
                     </p>
                   </div>
                 </div>
@@ -168,7 +168,7 @@ export default function Home() {
                   </div>
                   <div className="flex flex-col pb-6">
                     <p className="text-gray-900 text-lg font-medium leading-normal">복약 정보 입력</p>
-                    <p className="text-gray-500 text-base font-normal leading-normal">클릭 한번으로 복약 일정을 등록하고, 건강 데이터를 기록하세요.</p>
+                    <p className="text-gray-500 text-base font-normal leading-normal">클릭 한번으로 복약 일정 및 건강 정보를 등록하고, 건강 데이터를 기록하세요.</p>
                   </div>
 
                   {/* Step 3 */}
@@ -178,7 +178,7 @@ export default function Home() {
                   </div>
                   <div className="flex flex-col">
                     <p className="text-gray-900 text-lg font-medium leading-normal">일상 속 건강 관리</p>
-                    <p className="text-gray-500 text-base font-normal leading-normal">알림과 AI 추천으로 만성질환을 더 쉽게 관리하세요.</p>
+                    <p className="text-gray-500 text-base font-normal leading-normal">알림과 AI 추천, 그리고 전문가 피드백으로 만성질환을 더 쉽게 관리하세요.</p>
                   </div>
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default function Home() {
                 <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
               </svg>
               <blockquote className="text-2xl font-medium text-gray-900 md:text-3xl">
-                "당뇨 관리가 막막했는데 CareNavi 덕분에 복약도 안 놓치고, 혈당 변화도 한눈에 볼 수 있어서 정말 편해졌어요. 이제는 건강 관리가 습관이 됐습니다."
+                "만성질환 관리가 막막했는데 CareNavi 덕분에 복약도 안 놓치고, 혈당, 혈압 관리도 자동으로 정리되어 정말 편해졌어요. AI 분석과 약사 선생님피드백이 함께하니 일상에서도 부담 없이 건강을 챙길 수 있게 됐습니다."
               </blockquote>
               <div className="flex items-center gap-4">
                 <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-xl font-bold">
