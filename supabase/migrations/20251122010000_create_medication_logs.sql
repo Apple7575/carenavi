@@ -27,20 +27,20 @@ ALTER TABLE medication_logs ENABLE ROW LEVEL SECURITY;
 -- RLS Policies
 CREATE POLICY "Users can view their own medication logs"
   ON medication_logs FOR SELECT
-  USING (auth.uid() = user_id);
+  USING ((SELECT auth.uid()) = user_id);
 
 CREATE POLICY "Users can insert their own medication logs"
   ON medication_logs FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK ((SELECT auth.uid()) = user_id);
 
 CREATE POLICY "Users can update their own medication logs"
   ON medication_logs FOR UPDATE
-  USING (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
+  USING ((SELECT auth.uid()) = user_id)
+  WITH CHECK ((SELECT auth.uid()) = user_id);
 
 CREATE POLICY "Users can delete their own medication logs"
   ON medication_logs FOR DELETE
-  USING (auth.uid() = user_id);
+  USING ((SELECT auth.uid()) = user_id);
 
 -- Create updated_at trigger
 CREATE OR REPLACE FUNCTION update_medication_logs_updated_at()
