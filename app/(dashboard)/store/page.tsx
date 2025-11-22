@@ -11,9 +11,43 @@ export default function StorePage() {
 
   const getRecommendations = async () => {
     setIsLoading(true);
-    // TODO: Implement AI recommendations based on health data
-    // For now, show placeholder
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/store/recommendations');
+      if (response.ok) {
+        const data = await response.json();
+        setRecommendations(data.recommendations || []);
+      } else {
+        // Fallback to placeholder data if API fails
+        setRecommendations([
+          {
+            id: 1,
+            name: '오메가-3 피쉬오일',
+            category: '영양제',
+            reason: '심혈관 건강 개선에 도움',
+            price: '29,900원',
+            image: 'https://source.unsplash.com/400x400/?omega-3,fish-oil',
+          },
+          {
+            id: 2,
+            name: '비타민 D3',
+            category: '영양제',
+            reason: '골다공증 예방 및 면역력 강화',
+            price: '19,900원',
+            image: 'https://source.unsplash.com/400x400/?vitamin,supplement',
+          },
+          {
+            id: 3,
+            name: '유산균 프로바이오틱스',
+            category: '영양제',
+            reason: '장 건강 개선',
+            price: '34,900원',
+            image: 'https://source.unsplash.com/400x400/?probiotics,health',
+          },
+        ]);
+      }
+    } catch (error) {
+      console.error('Failed to fetch recommendations:', error);
+      // Use placeholder on error
       setRecommendations([
         {
           id: 1,
@@ -21,7 +55,7 @@ export default function StorePage() {
           category: '영양제',
           reason: '심혈관 건강 개선에 도움',
           price: '29,900원',
-          image: 'https://images.unsplash.com/photo-1526694312330-a44d3a1d3f1a?w=400&q=80',
+          image: 'https://source.unsplash.com/400x400/?omega-3,fish-oil',
         },
         {
           id: 2,
@@ -29,7 +63,7 @@ export default function StorePage() {
           category: '영양제',
           reason: '골다공증 예방 및 면역력 강화',
           price: '19,900원',
-          image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80',
+          image: 'https://source.unsplash.com/400x400/?vitamin,supplement',
         },
         {
           id: 3,
@@ -37,11 +71,12 @@ export default function StorePage() {
           category: '영양제',
           reason: '장 건강 개선',
           price: '34,900원',
-          image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&q=80',
+          image: 'https://source.unsplash.com/400x400/?probiotics,health',
         },
       ]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   React.useEffect(() => {

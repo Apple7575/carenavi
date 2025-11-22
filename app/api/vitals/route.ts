@@ -13,8 +13,18 @@ export async function GET(request: NextRequest) {
     const { createAdminClient } = await import('@/lib/supabase/server');
     const adminClient = createAdminClient();
 
+    // Get the current user's member_id (not family_id - we only want current user's vitals)
+    const { data: memberData, error: memberError } = await adminClient
+      .from('family_members')
+      .select('id')
+      .eq('user_id', user.id)
+      .single();
+
+    if (memberError || !memberData) {
+      return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
+    }
+
     const { searchParams } = new URL(request.url);
-    const familyMemberId = searchParams.get('family_member_id');
     const type = searchParams.get('type');
     const days = parseInt(searchParams.get('days') || '30');
 
@@ -31,12 +41,9 @@ export async function GET(request: NextRequest) {
           relationship
         )
       `)
+      .eq('member_id', (memberData as any).id)
       .gte('measured_at', startDate.toISOString())
       .order('measured_at', { ascending: false });
-
-    if (familyMemberId) {
-      query = query.eq('member_id', familyMemberId);
-    }
 
     if (type) {
       query = query.eq('type', type);

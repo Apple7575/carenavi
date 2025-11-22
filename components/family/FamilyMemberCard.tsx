@@ -3,8 +3,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Activity, Pill } from 'lucide-react';
 import { useFamily } from '@/hooks/useFamily';
+import { FamilyMemberDetailDialog } from './FamilyMemberDetailDialog';
 
 interface FamilyMemberCardProps {
   member: any;
@@ -12,6 +13,7 @@ interface FamilyMemberCardProps {
 
 export function FamilyMemberCard({ member }: FamilyMemberCardProps) {
   const { removeMember, isRemoving } = useFamily();
+  const [detailDialogOpen, setDetailDialogOpen] = React.useState(false);
 
   const getInitials = (name: string) => {
     return name.split(' ').map(part => part[0]).join('').toUpperCase().slice(0, 2);
@@ -69,19 +71,36 @@ export function FamilyMemberCard({ member }: FamilyMemberCardProps) {
             </div>
           </div>
 
-          {!isSelf && (
+          <div className="flex items-center gap-2">
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
-              onClick={handleRemove}
-              disabled={isRemoving}
-              className="text-error hover:text-error"
+              onClick={() => setDetailDialogOpen(true)}
+              className="shadow-sm hover:shadow-md"
             >
-              <Trash2 className="h-4 w-4" />
+              <Activity className="h-3 w-3 mr-1" />
+              상세보기
             </Button>
-          )}
+            {!isSelf && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleRemove}
+                disabled={isRemoving}
+                className="text-error hover:text-error"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
         </div>
       </CardContent>
+
+      <FamilyMemberDetailDialog
+        member={member}
+        open={detailDialogOpen}
+        onOpenChange={setDetailDialogOpen}
+      />
     </Card>
   );
 }

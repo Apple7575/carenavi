@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const supabase = createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -13,10 +13,18 @@ export async function GET(request: NextRequest) {
     const { createAdminClient } = await import('@/lib/supabase/server');
     const adminClient = createAdminClient();
 
-    const { searchParams } = new URL(request.url);
-    const memberId = searchParams.get('member_id');
+    // Get the current user's member_id (only show current user's medications)
+    const { data: memberData, error: memberError } = await adminClient
+      .from('family_members')
+      .select('id')
+      .eq('user_id', user.id)
+      .single();
 
-    let query = adminClient
+    if (memberError || !memberData) {
+      return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
+    }
+
+    const query = adminClient
       .from('medications')
       .select(`
         *,
@@ -28,11 +36,8 @@ export async function GET(request: NextRequest) {
           )
         )
       `)
+      .eq('member_id', (memberData as any).id)
       .order('created_at', { ascending: false });
-
-    if (memberId) {
-      query = query.eq('member_id', memberId);
-    }
 
     const { data, error } = await query;
 
