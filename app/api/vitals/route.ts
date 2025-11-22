@@ -78,6 +78,25 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
     }
 
+    // Determine unit based on type
+    let unit = '';
+    switch (body.type) {
+      case 'blood_pressure':
+        unit = 'mmHg';
+        break;
+      case 'blood_sugar':
+        unit = 'mg/dL';
+        break;
+      case 'weight':
+        unit = 'kg';
+        break;
+      case 'heart_rate':
+        unit = 'bpm';
+        break;
+      default:
+        unit = '';
+    }
+
     const { data, error } = await adminClient
       .from('vitals')
       .insert({
@@ -85,8 +104,9 @@ export async function POST(request: NextRequest) {
         member_id: body.family_member_id || (memberData as any).id,
         type: body.type,
         value: body.value,
+        unit: unit,
         measured_at: body.measured_at || new Date().toISOString(),
-        notes: body.notes,
+        notes: body.notes || '',
       })
       .select()
       .single();
