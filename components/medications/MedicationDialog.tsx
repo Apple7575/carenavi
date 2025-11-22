@@ -27,7 +27,7 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
     end_date: '',
     instructions: '',
     is_active: true,
-    family_member_id: '',
+    member_id: '',
   });
 
   React.useEffect(() => {
@@ -41,7 +41,7 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
         end_date: medication.end_date || '',
         instructions: medication.instructions || '',
         is_active: medication.is_active ?? true,
-        family_member_id: medication.family_member_id || '',
+        member_id: medication.member_id || '',
       });
     } else {
       setFormData({
@@ -53,7 +53,7 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
         end_date: '',
         instructions: '',
         is_active: true,
-        family_member_id: '',
+        member_id: '',
       });
     }
   }, [medication, open]);
@@ -85,8 +85,8 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
             <div className="space-y-2">
               <Label htmlFor="family_member">가족 구성원 *</Label>
               <Select
-                value={formData.family_member_id}
-                onValueChange={(value) => setFormData({ ...formData, family_member_id: value })}
+                value={formData.member_id}
+                onValueChange={(value) => setFormData({ ...formData, member_id: value })}
                 required
               >
                 <SelectTrigger id="family_member">

@@ -10,14 +10,17 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { searchParams } = new URL(request.url);
-    const familyMemberId = searchParams.get('family_member_id');
+    const { createAdminClient } = await import('@/lib/supabase/server');
+    const adminClient = createAdminClient();
 
-    let query = supabase
+    const { searchParams } = new URL(request.url);
+    const memberId = searchParams.get('member_id');
+
+    let query = adminClient
       .from('medications')
       .select(`
         *,
-        family_member:family_members (
+        family_member:family_members!member_id (
           id,
           relationship,
           user:users (
@@ -27,8 +30,8 @@ export async function GET(request: NextRequest) {
       `)
       .order('created_at', { ascending: false });
 
-    if (familyMemberId) {
-      query = query.eq('family_member_id', familyMemberId);
+    if (memberId) {
+      query = query.eq('member_id', memberId);
     }
 
     const { data, error } = await query;
@@ -51,19 +54,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { createAdminClient } = await import('@/lib/supabase/server');
+    const adminClient = createAdminClient();
+
     const body = await request.json();
 
-    const { data, error } = await supabase
+    // Get family_id from member_id
+    const { data: memberData, error: memberError } = await adminClient
+      .from('family_members')
+      .select('family_id')
+      .eq('id', body.member_id)
+      .single();
+
+    if (memberError || !memberData) {
+      return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
+    }
+
+    const { data, error } = await adminClient
       .from('medications')
       .insert({
-        family_member_id: body.family_member_id,
+        family_id: (memberData as any).family_id,
+        member_id: body.member_id,
         name: body.name,
         dosage: body.dosage,
         frequency: body.frequency,
         schedule_times: body.schedule_times,
         start_date: body.start_date,
         end_date: body.end_date,
-        instructions: body.instructions,
+        notes: body.instructions,
         is_active: body.is_active ?? true,
       })
       .select()
