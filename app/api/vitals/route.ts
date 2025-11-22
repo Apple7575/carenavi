@@ -69,10 +69,22 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
+    // Get family_id from the user's family membership
+    const { data: memberData, error: memberError } = await adminClient
+      .from('family_members')
+      .select('family_id, id')
+      .eq('user_id', user.id)
+      .single();
+
+    if (memberError || !memberData) {
+      return NextResponse.json({ error: 'Family member not found' }, { status: 404 });
+    }
+
     const { data, error } = await adminClient
       .from('vitals')
       .insert({
-        family_member_id: body.family_member_id,
+        family_id: (memberData as any).family_id,
+        family_member_id: body.family_member_id || (memberData as any).id,
         type: body.type,
         value: body.value,
         measured_at: body.measured_at || new Date().toISOString(),
