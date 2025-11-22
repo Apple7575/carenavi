@@ -46,10 +46,10 @@ export default function Home() {
               <div className="flex flex-col gap-8 text-center lg:text-left">
                 <div className="flex flex-col gap-4">
                   <h1 className="text-gray-900 text-4xl font-black leading-tight tracking-tighter md:text-5xl lg:text-6xl">
-                    가족 모두를 위한<br />스마트 건강 관리
+                    클릭 한번으로,<br />일상에 만성질환 관리를 더하다
                   </h1>
                   <h2 className="text-gray-500 text-lg font-normal leading-normal md:text-xl">
-                    건강 기록을 중앙화하고, 복약을 추적하며, AI 기반 인사이트를 받아보세요.<br />모두 안전한 한 곳에서.
+                    복약 알림부터 건강 데이터 추적까지.<br />만성질환 관리, 이제 더 쉽고 간편하게.
                   </h2>
                 </div>
                 <div className="flex justify-center lg:justify-start">
@@ -73,10 +73,10 @@ export default function Home() {
             <div className="flex flex-col items-center gap-12">
               <div className="flex flex-col gap-4 text-center max-w-3xl">
                 <h2 className="text-gray-900 text-3xl font-bold tracking-tight md:text-4xl">
-                  가족의 건강, 간편하게
+                  만성질환 관리, 간편하게
                 </h2>
                 <p className="text-gray-500 text-lg font-normal leading-normal">
-                  CareNavi는 가족의 모든 건강 정보를 안전하고 사용하기 쉬운 대시보드로 통합합니다.
+                  CareNavi는 복약 관리부터 건강 데이터 추적까지, 만성질환 관리에 필요한 모든 것을 하나로 모았습니다.
                 </p>
               </div>
               <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -88,9 +88,9 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-gray-900 text-lg font-bold leading-tight">통합 건강 대시보드</h3>
+                    <h3 className="text-gray-900 text-lg font-bold leading-tight">간편한 복약 관리</h3>
                     <p className="text-gray-500 text-base font-normal leading-normal">
-                      가족 모두의 의료 기록, 예약, 건강 지표를 하나의 직관적인 대시보드에서 관리하세요.
+                      복잡한 복약 일정도 클릭 한번으로 등록하고, 놓치지 않도록 알림을 받아보세요.
                     </p>
                   </div>
                 </div>
@@ -103,9 +103,9 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-gray-900 text-lg font-bold leading-tight">스마트 복약 알림</h3>
+                    <h3 className="text-gray-900 text-lg font-bold leading-tight">건강 데이터 추적</h3>
                     <p className="text-gray-500 text-base font-normal leading-normal">
-                      가족의 모든 복약 일정에 대한 지능형 알림과 스케줄링으로 복약을 절대 놓치지 마세요.
+                      혈압, 혈당 등 주요 건강 지표를 기록하고 추이를 한눈에 확인하세요.
                     </p>
                   </div>
                 </div>
@@ -118,9 +118,9 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-gray-900 text-lg font-bold leading-tight">AI 건강 인사이트</h3>
+                    <h3 className="text-gray-900 text-lg font-bold leading-tight">AI 맞춤 추천</h3>
                     <p className="text-gray-500 text-base font-normal leading-normal">
-                      개인화된 데이터 기반 인사이트를 받아 건강 트렌드를 이해하고 정보에 기반한 결정을 내리세요.
+                      건강 데이터를 분석해 나에게 필요한 건강 보조제와 생활 습관을 추천받으세요.
                     </p>
                   </div>
                 </div>
@@ -148,8 +148,8 @@ export default function Home() {
                     <div className="w-px grow bg-gray-200"></div>
                   </div>
                   <div className="flex flex-col pb-6">
-                    <p className="text-gray-900 text-lg font-medium leading-normal">안전한 가족 계정 만들기</p>
-                    <p className="text-gray-500 text-base font-normal leading-normal">빠르게 가입하고 각 가족 구성원의 프로필을 설정하세요. 우리 플랫폼은 HIPAA를 준수하며 데이터는 항상 암호화됩니다.</p>
+                    <p className="text-gray-900 text-lg font-medium leading-normal">간편하게 시작하기</p>
+                    <p className="text-gray-500 text-base font-normal leading-normal">이메일만으로 30초 만에 가입 완료. 복잡한 절차 없이 바로 시작하세요.</p>
                   </div>
 
                   {/* Step 2 */}
@@ -159,8 +159,8 @@ export default function Home() {
                     <div className="w-px grow bg-gray-200"></div>
                   </div>
                   <div className="flex flex-col pb-6">
-                    <p className="text-gray-900 text-lg font-medium leading-normal">건강 데이터 & 일정 연결</p>
-                    <p className="text-gray-500 text-base font-normal leading-normal">복약 일정을 추가하고, 문서를 업로드하고, 예약을 가족의 중앙 대시보드에 동기화하세요.</p>
+                    <p className="text-gray-900 text-lg font-medium leading-normal">복약 정보 입력</p>
+                    <p className="text-gray-500 text-base font-normal leading-normal">클릭 한번으로 복약 일정을 등록하고, 건강 데이터를 기록하세요.</p>
                   </div>
 
                   {/* Step 3 */}
@@ -169,8 +169,8 @@ export default function Home() {
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm">3</div>
                   </div>
                   <div className="flex flex-col">
-                    <p className="text-gray-900 text-lg font-medium leading-normal">마음의 평화 얻기</p>
-                    <p className="text-gray-500 text-base font-normal leading-normal">스마트 알림과 실행 가능한 인사이트를 받아 가족의 건강을 능동적으로 관리하세요.</p>
+                    <p className="text-gray-900 text-lg font-medium leading-normal">일상 속 건강 관리</p>
+                    <p className="text-gray-500 text-base font-normal leading-normal">알림과 AI 추천으로 만성질환을 더 쉽게 관리하세요.</p>
                   </div>
                 </div>
               </div>
@@ -186,15 +186,15 @@ export default function Home() {
                 <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
               </svg>
               <blockquote className="text-2xl font-medium text-gray-900 md:text-3xl">
-                "CareNavi는 부모님의 복약 관리와 아이들의 병원 예약을 관리하는 데 생명의 은인이었습니다. 모든 것이 한곳에 있고, 마음의 평화는 값을 매길 수 없습니다."
+                "당뇨 관리가 막막했는데 CareNavi 덕분에 복약도 안 놓치고, 혈당 변화도 한눈에 볼 수 있어서 정말 편해졌어요. 이제는 건강 관리가 습관이 됐습니다."
               </blockquote>
               <div className="flex items-center gap-4">
                 <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-xl font-bold">
-                  김
+                  이
                 </div>
                 <div className="text-left">
-                  <p className="font-bold text-gray-900">김서연</p>
-                  <p className="text-gray-500">어머니 & 간병인</p>
+                  <p className="font-bold text-gray-900">이진수</p>
+                  <p className="text-gray-500">당뇨 환자, 52세</p>
                 </div>
               </div>
             </div>
@@ -207,14 +207,14 @@ export default function Home() {
             <div className="rounded-xl bg-primary/90 p-10 text-center md:p-16">
               <div className="mx-auto flex max-w-2xl flex-col items-center gap-6">
                 <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-                  가족의 건강을 관리할 준비가 되셨나요?
+                  만성질환 관리, 더 이상 어렵지 않습니다
                 </h2>
                 <p className="text-lg text-white/80">
-                  더 간단하고 스마트한 건강 관리 방법을 위해 CareNavi를 신뢰하는 수천 가족과 함께하세요. 오늘 무료로 가입하세요.
+                  클릭 한번으로 시작하는 스마트한 건강 관리. 지금 바로 무료로 시작하세요.
                 </p>
                 <Link href="/signup">
                   <Button className="rounded-full h-12 px-6 bg-white text-primary hover:bg-gray-100 shadow-lg">
-                    지금 가입하기
+                    무료로 시작하기
                   </Button>
                 </Link>
               </div>
