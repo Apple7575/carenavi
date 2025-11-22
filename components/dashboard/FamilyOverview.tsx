@@ -77,47 +77,50 @@ export function FamilyOverview({ members }: FamilyOverviewProps) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>가족 구성원</CardTitle>
-        <CardDescription>
+    <Card className="shadow-sm hover:shadow-md transition-shadow">
+      <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 border-b">
+        <CardTitle className="text-lg">가족 구성원</CardTitle>
+        <CardDescription className="text-gray-600">
           총 {members.length}명의 건강 상태
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
+      <CardContent className="pt-6">
+        <div className="space-y-3">
           {members.map((member) => (
             <div
               key={member.id}
-              className="flex items-center justify-between p-3 rounded-lg border border-border hover:bg-gray-50 transition-colors"
+              className="flex items-center justify-between p-4 rounded-xl border border-gray-200 bg-white hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50 hover:border-blue-200 transition-all duration-200 shadow-sm"
             >
-              <div className="flex items-center gap-3">
-                <Avatar>
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12 border-2 border-white shadow-md">
                   <AvatarImage src="" alt={member.user.full_name} />
-                  <AvatarFallback>
+                  <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white font-semibold">
                     {getInitials(member.user.full_name)}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-medium text-gray-900">
+                  <p className="font-semibold text-gray-900 text-base">
                     {member.user.full_name}
                   </p>
-                  <p className="text-sm text-gray-500">{member.relationship}</p>
+                  <p className="text-sm text-gray-500 flex items-center gap-1 mt-0.5">
+                    <span className="inline-block w-1 h-1 bg-gray-400 rounded-full"></span>
+                    {member.relationship}
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-lg font-bold text-gray-900">
                     {member.health_score}점
                   </p>
                   <p className="text-xs text-gray-500">건강 점수</p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50">
                   <div
-                    className={`h-2 w-2 rounded-full ${getStatusColor(member.status)}`}
+                    className={`h-2.5 w-2.5 rounded-full ${getStatusColor(member.status)} shadow-sm`}
                   />
-                  <span className="text-xs text-gray-600">
+                  <span className="text-xs font-medium text-gray-700">
                     {getStatusText(member.status)}
                   </span>
                 </div>

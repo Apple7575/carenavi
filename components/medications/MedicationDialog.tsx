@@ -72,15 +72,17 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
-        <DialogHeader>
-          <DialogTitle>{medication ? '복약 수정' : '복약 추가'}</DialogTitle>
-          <DialogDescription>
-            복약 정보를 입력하세요
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader className="space-y-3 pb-4 border-b">
+          <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            {medication ? '복약 수정' : '복약 추가'}
+          </DialogTitle>
+          <DialogDescription className="text-base text-gray-600">
+            복약 정보를 정확하게 입력하세요
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6 pt-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="family_member">가족 구성원 *</Label>
@@ -176,20 +178,30 @@ export function MedicationDialog({ open, onOpenChange, medication }: MedicationD
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="instructions">복용 방법</Label>
+            <Label htmlFor="instructions" className="text-sm font-medium">복용 방법</Label>
             <Input
               id="instructions"
               placeholder="예: 식후 30분, 물과 함께"
               value={formData.instructions}
               onChange={(e) => setFormData({ ...formData, instructions: e.target.value })}
+              className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
 
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+          <DialogFooter className="gap-2 pt-4 border-t">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+              className="hover:bg-gray-100"
+            >
               취소
             </Button>
-            <Button type="submit" disabled={isCreating || isUpdating}>
+            <Button
+              type="submit"
+              disabled={isCreating || isUpdating}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+            >
               {medication ? '수정' : '추가'}
             </Button>
           </DialogFooter>
