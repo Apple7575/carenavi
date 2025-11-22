@@ -21,7 +21,7 @@ export default function StorePage() {
           category: '영양제',
           reason: '심혈관 건강 개선에 도움',
           price: '29,900원',
-          image: '💊',
+          image: 'https://images.unsplash.com/photo-1526694312330-a44d3a1d3f1a?w=400&q=80',
         },
         {
           id: 2,
@@ -29,7 +29,7 @@ export default function StorePage() {
           category: '영양제',
           reason: '골다공증 예방 및 면역력 강화',
           price: '19,900원',
-          image: '☀️',
+          image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80',
         },
         {
           id: 3,
@@ -37,7 +37,7 @@ export default function StorePage() {
           category: '영양제',
           reason: '장 건강 개선',
           price: '34,900원',
-          image: '🦠',
+          image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&q=80',
         },
       ]);
       setIsLoading(false);
@@ -99,9 +99,15 @@ export default function StorePage() {
         ) : (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {recommendations.map((product) => (
-              <Card key={product.id} className="hover:shadow-lg transition-shadow">
+              <Card key={product.id} className="hover:shadow-lg transition-shadow overflow-hidden">
+                <div className="w-full h-48 overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <CardHeader>
-                  <div className="text-5xl mb-2">{product.image}</div>
                   <CardTitle className="text-lg">{product.name}</CardTitle>
                   <CardDescription>{product.category}</CardDescription>
                 </CardHeader>
