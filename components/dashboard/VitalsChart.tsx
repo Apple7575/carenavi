@@ -9,16 +9,12 @@ import { Activity } from 'lucide-react';
 
 interface Vital {
   id: string;
-  family_member_id: string;
+  user_id: string;
   type: 'blood_pressure' | 'blood_sugar' | 'weight' | 'heart_rate';
   value: string;
+  unit: string;
   measured_at: string;
   notes?: string;
-  family_member: {
-    user: {
-      full_name: string;
-    };
-  };
 }
 
 interface VitalsChartProps {
